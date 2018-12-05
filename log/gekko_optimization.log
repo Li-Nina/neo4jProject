@@ -10,3 +10,49 @@
 2018-12-05 12:05:22,296 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[8.410955]', '塞拉利昂粉=[12.38867]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
 2018-12-05 12:05:22,298 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.17565633128305, 5.199951920097999, 2.6982416318639566, 0.7128133123365088, 3.000000273920421, 0.048518530915677816, 0.06764917045197939, 0.1319273653048831]
 2018-12-05 12:05:22,298 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=447.75303320145434, wet_price=492.506582248679, obj_price=530.7026698741009)
+2018-12-05 12:41:56,691 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:41:56,691 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:50:27,195 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:50:27,195 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:50:27,432 __main__ mainTask ERROR = <traceback object at 0x09359F08>
+2018-12-05 12:51:03,258 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:51:03,258 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:51:03,576 __main__ mainTask ERROR =  @error: Solution Not Found
+
+2018-12-05 12:53:19,424 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:53:19,424 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:53:19,672 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 37, in <module>
+    lp.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 46, in solve
+    self.prob.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-05 12:54:48,995 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:54:48,995 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:54:49,233 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 37, in <module>
+    lp.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 46, in solve
+    self.prob.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-05 12:56:32,913 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:56:32,913 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:56:33,196 __main__ mainTask ERROR = Exception(' @error: Solution Not Found\n')
+2018-12-05 12:56:33,197 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 37, in <module>
+    lp.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 46, in solve
+    self.prob.solve()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+

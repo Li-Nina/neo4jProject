@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import traceback
+
 from utils.logger import Logger
 
 # lp = MinPriceProblem("../data/template.xlsx")
@@ -8,19 +10,23 @@ from pulpSolution.pulpProblem import PulpProblem
 
 logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
 
-lp = PulpProblem()
-# lp.prob = LpProblem("maxPro", LpMaximize)
-# lp.remove_construct("objective")
-lp.add_construct("objective", FeObjectivePulpConstruct())
-# lp.add_construct("objective", SiObjectiveConstruct())
-lp.build()
-print(lp.prob)
+try:
+    lp = PulpProblem()
+    # lp.prob = LpProblem("maxPro", LpMaximize)
+    # lp.remove_construct("objective")
+    lp.add_construct("objective", FeObjectivePulpConstruct())
+    # lp.add_construct("objective", SiObjectiveConstruct())
+    lp.build()
+    print(lp.prob)
 
-lp.solve()
-print(lp.get_solve_status())
+    lp.solve()
+    print(lp.get_solve_status())
 
-lp.print_solve()
-print(lp.get_ingredient_result())
-print(lp.get_price())
+    lp.print_solve()
+    print(lp.get_ingredient_result())
+    print(lp.get_price())
 
-lp.write_to_excel()
+    lp.write_to_excel()
+except Exception as e:
+    print(repr(e))
+    logger.error(traceback.format_exc())

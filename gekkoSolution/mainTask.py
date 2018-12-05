@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import traceback
+
 from gekkoSolution.gekkoConstruct import ObjectiveConstructBuilder, \
     PriceObjectiveConstruct, IngredientObjectiveConstruct
 from gekkoSolution.gekkoProblem import GekkoProblem
@@ -9,30 +11,35 @@ from utils.logger import Logger
 logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
 # todo 打包
-lp = GekkoProblem()
 
-weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1})
+try:
+    lp = GekkoProblem()
 
-lp.remove_construct("objective")
-objectives = ObjectiveConstructBuilder(lp,
-                                       (PriceObjectiveConstruct(lp), weights['cost']),
-                                       (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
-                                        weights['tfe']),
-                                       (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
-                                        weights['sio2'])
-                                       )
-lp.add_construct("objective", objectives)
+    weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1})
 
-lp.build()
+    lp.remove_construct("objective")
+    objectives = ObjectiveConstructBuilder(lp,
+                                           (PriceObjectiveConstruct(lp), weights['cost']),
+                                           (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
+                                            weights['tfe']),
+                                           (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
+                                            weights['sio2'])
+                                           )
+    lp.add_construct("objective", objectives)
 
-lp.prob.options.IMODE = 3  # steady state optimization
+    lp.build()
 
-print(lp.prob)
+    lp.prob.options.IMODE = 3  # steady state optimization
 
-# Solve simulation
-lp.solve()
-lp.print_solve()
-print(lp.get_price())
-print(lp.get_ingredient_result())
+    print(lp.prob)
 
-lp.write_to_excel()
+    # Solve simulation
+    lp.solve()
+    lp.print_solve()
+    print(lp.get_price())
+    print(lp.get_ingredient_result())
+
+    lp.write_to_excel()
+except Exception as e:
+    print(repr(e))
+    logger.error(traceback.format_exc())

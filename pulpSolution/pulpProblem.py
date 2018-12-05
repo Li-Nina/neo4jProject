@@ -95,4 +95,4 @@ class PulpProblem:
             self.data.write_ingredient_result(ingredient_result_list)
             self.data.write_to_excel(excel_file, prices)
         else:
-            raise Exception("get_solve_status is not Optimal!")
+            raise Exception("Solution Not Found!")
