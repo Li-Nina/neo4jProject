@@ -1,3 +1,3 @@
-# optimizationProblem
+# OptimizationProblem
 
-LP NLP Optimization Problem using PuLP&Gekko
+LP NLP Optimization Problem using PuLP&GEKKO under APMonitor
