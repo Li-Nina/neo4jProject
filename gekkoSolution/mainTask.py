@@ -3,14 +3,13 @@
 from gekkoSolution.gekkoConstruct import ObjectiveConstructBuilder, \
     PriceObjectiveConstruct, IngredientObjectiveConstruct
 from gekkoSolution.gekkoProblem import GekkoProblem
+from gekkoSolution.gekkoUtils import cal_weights
 from utils.logger import Logger
 
-from utils.utils import cal_weights
+logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
-logger = Logger(__name__).get()
-
-# todo 打包，日志
-lp = GekkoProblem("../../data/template.xlsx")
+# todo 打包
+lp = GekkoProblem()
 
 weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1})
 
@@ -36,4 +35,4 @@ lp.print_solve()
 print(lp.get_price())
 print(lp.get_ingredient_result())
 
-lp.write_to_excel("../../data/result.xlsx")
+lp.write_to_excel()

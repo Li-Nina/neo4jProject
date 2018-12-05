@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from pulp import LpProblem, LpMinimize, LpMaximize
-
+from utils.logger import Logger
 
 # lp = MinPriceProblem("../data/template.xlsx")
 from pulpSolution.pulpConstruct import FeObjectivePulpConstruct
 from pulpSolution.pulpProblem import PulpProblem
+
+logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
 
 lp = PulpProblem()
 # lp.prob = LpProblem("maxPro", LpMaximize)

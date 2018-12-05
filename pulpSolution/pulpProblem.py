@@ -1,18 +1,22 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+from collections import namedtuple
 
 from pulp import *
 
 from pulpSolution.pulpConstruct import ObjectivePulpConstruct, SubjectivePulpConstruct, VarPulpConstruct, \
     VarGroupPulpConstruct
-from utils.ingredientsRead import IngredientsRead
+from utils.excelParse import ExcelParse
+from utils.logger import Logger
 from utils.utils import check_nan
+
+logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
 
 
 class PulpProblem:
 
     def __init__(self, excel_file="../data/template.xlsx", exclude=None, name="The Optimization Problem"):
-        self.data = IngredientsRead(excel_file=excel_file, exclude=exclude)
+        self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
         self.prob = LpProblem(name, LpMinimize)
         # 构建Lp变量字典，变量名以var_开头，如var_x1，下界是0
         self.ingredient_vars = LpVariable.dicts("var", self.data.Ingredients, 0)
@@ -56,6 +60,19 @@ class PulpProblem:
                 for Element in self.data.Ingredients_list]
 
     def get_price(self):
+        dry_price = sum(check_nan(self.data.Cost[k]) * self.ingredient_vars[k].value()
+                        * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients)
+        h20_per = sum(self.ingredient_vars[k].value() * self.data.H2O[k] / 100 for k in self.data.Ingredients)
+        ss_per = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k].value()
+                     * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients) / (
+                         1 - h20_per / 100)
+        wet_price = dry_price / (1 - h20_per / 100)
+        obj_price = wet_price / (1 - ss_per / 100)
+
+        Prices = namedtuple("Prices", ['dry_price', 'wet_price', 'obj_price'])
+        return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price)
+
+    def get_objfcnval(self):
         return value(self.prob.objective)
 
     def write_to_excel(self, excel_file=None):
@@ -65,10 +82,17 @@ class PulpProblem:
             result = [self.ingredient_vars[k].value() for k in self.data.Ingredients]
             name_result = [self.data.Ingredients_names[self.ingredient_vars[k].name] + "="
                            + str(self.ingredient_vars[k].value()) for k in self.data.Ingredients]
+            logger.info("optimization result is: " + str(result))
+            logger.info("optimization name_result is: " + str(name_result))
             self.data.write_solves(result, name_result)
 
             # 混合料计算成分
-            self.data.write_ingredient_result(self.get_ingredient_result())
-            self.data.write_to_excel(excel_file, self.get_price())
+            ingredient_result_list = self.get_ingredient_result()
+            prices = self.get_price()
+
+            logger.info("optimization ingredient_result_list is: " + str(ingredient_result_list))
+            logger.info("optimization prices is: " + str(prices))
+            self.data.write_ingredient_result(ingredient_result_list)
+            self.data.write_to_excel(excel_file, prices)
         else:
             raise Exception("get_solve_status is not Optimal!")

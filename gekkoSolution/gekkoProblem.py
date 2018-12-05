@@ -6,17 +6,17 @@ from gekko import GEKKO
 
 from gekkoSolution.gekkoConstruct import PriceObjectiveConstruct, SubjectiveConstruct, VarConstruct, \
     VarGroupConstruct, ObjectiveConstructBuilder
-from utils.ingredientsRead import IngredientsRead
+from utils.excelParse import ExcelParse
 from utils.logger import Logger
 from utils.utils import check_nan
 
-logger = Logger(__name__).get()
+logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
 
 class GekkoProblem:
 
     def __init__(self, excel_file="../data/template.xlsx", exclude=None):
-        self.data = IngredientsRead(excel_file=excel_file, exclude=exclude)
+        self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
         self.prob = GEKKO(remote=False)  # Initialize gekko
         self.prob.options.SOLVER = 1  # APOPT is an MINLP solver
         # 构建变量字典

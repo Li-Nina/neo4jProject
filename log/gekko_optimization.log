@@ -1,0 +1,12 @@
+2018-12-05 12:04:52,855 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:04:52,855 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:04:53,891 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 8.410955, 12.38867, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-05 12:04:53,891 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[8.410955]', '塞拉利昂粉=[12.38867]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-05 12:04:53,893 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.17565633128305, 5.199951920097999, 2.6982416318639566, 0.7128133123365088, 3.000000273920421, 0.048518530915677816, 0.06764917045197939, 0.1319273653048831]
+2018-12-05 12:04:53,893 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=447.75303320145434, wet_price=492.506582248679, obj_price=530.7026698741009)
+2018-12-05 12:05:21,900 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost'), (59.45, 5.0, 462.58579900551536), (1, 1, 1)]
+2018-12-05 12:05:21,900 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 7.681366649542781, 'sio2': 91.33144946306368, 'cost': 0.9871838873935551}
+2018-12-05 12:05:22,295 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 8.410955, 12.38867, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-05 12:05:22,296 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[8.410955]', '塞拉利昂粉=[12.38867]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-05 12:05:22,298 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.17565633128305, 5.199951920097999, 2.6982416318639566, 0.7128133123365088, 3.000000273920421, 0.048518530915677816, 0.06764917045197939, 0.1319273653048831]
+2018-12-05 12:05:22,298 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=447.75303320145434, wet_price=492.506582248679, obj_price=530.7026698741009)

@@ -7,7 +7,7 @@ from utils.logger import Logger
 
 from utils.utils import check_nan
 
-logger = Logger(__name__).get()
+logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
 
 # 多目标使用线性加权法

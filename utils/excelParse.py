@@ -6,7 +6,7 @@ from collections import namedtuple
 import pandas as pd
 
 
-class IngredientsRead:
+class ExcelParse:
     def __init__(self, excel_file, exclude=None):
         if exclude is None:
             exclude = {"配比"}
