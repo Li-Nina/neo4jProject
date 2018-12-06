@@ -2,11 +2,10 @@
 # -*- coding:utf-8 -*-
 import traceback
 
-from utils.logger import Logger
-
 # lp = MinPriceProblem("../data/template.xlsx")
 from pulpSolution.pulpConstruct import FeObjectivePulpConstruct
 from pulpSolution.pulpProblem import PulpProblem
+from utils.logger import Logger
 
 logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
 

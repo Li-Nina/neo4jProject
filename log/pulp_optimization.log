@@ -9,3 +9,10 @@
     raise Exception("Solution Not Found!")
 Exception: Solution Not Found!
 
+2018-12-06 15:52:43,206 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/pulpSolution/mainTask.py", line 28, in <module>
+    lp.write_to_excel()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\pulpSolution\pulpProblem.py", line 99, in write_to_excel
+    raise Exception("Solution Not Found!")
+Exception: Solution Not Found!
+

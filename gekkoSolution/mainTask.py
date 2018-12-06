@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import time
 import traceback
 
 from gekkoSolution.gekkoConstruct import ObjectiveConstructBuilder, \
@@ -10,9 +11,9 @@ from utils.logger import Logger
 
 logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
-# todo 打包
-
 try:
+    start = time.time()
+
     lp = GekkoProblem()
 
     weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1})
@@ -31,15 +32,17 @@ try:
 
     lp.prob.options.IMODE = 3  # steady state optimization
 
-    print(lp.prob)
-
     # Solve simulation
     lp.solve()
+
     lp.print_solve()
     print(lp.get_price())
     print(lp.get_ingredient_result())
 
     lp.write_to_excel()
+
+    end = time.time()
+    logger.info("gekko_optimization task run successfully, runtime  is %s s:", end - start)
 except Exception as e:
     print(repr(e))
     logger.error(traceback.format_exc())
