@@ -21,9 +21,9 @@ try:
     objectives = ObjectiveConstructBuilder(lp,
                                            (PriceObjectiveConstruct(lp), weights['cost']),
                                            (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
-                                            weights['tfe']),
-                                           (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
-                                            weights['sio2'])
+                                            weights['tfe'])
+                                           # (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
+                                           #  weights['sio2'])
                                            )
     lp.add_construct("objective", objectives)
 

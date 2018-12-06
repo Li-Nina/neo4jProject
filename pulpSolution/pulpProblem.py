@@ -62,7 +62,8 @@ class PulpProblem:
     def get_price(self):
         dry_price = sum(check_nan(self.data.Cost[k]) * self.ingredient_vars[k].value()
                         * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients)
-        h20_per = sum(self.ingredient_vars[k].value() * self.data.H2O[k] / 100 for k in self.data.Ingredients)
+        h20_per = sum(
+            self.ingredient_vars[k].value() * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
         ss_per = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k].value()
                      * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients) / (
                          1 - h20_per / 100)

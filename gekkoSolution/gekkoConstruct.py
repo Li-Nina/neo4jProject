@@ -58,7 +58,8 @@ class PriceObjectiveConstruct(GekkoConstruct):
         GekkoConstruct.__init__(self, optimization_problem)
         dry_price = sum(check_nan(self.pb.data.Cost[k]) * self.pb.ingredient_vars[k]
                         * (1 - check_nan(self.pb.data.H2O[k]) / 100) / 100 for k in self.pb.data.Ingredients)
-        h20_per = sum(self.pb.ingredient_vars[k] * self.pb.data.H2O[k] / 100 for k in self.pb.data.Ingredients)
+        h20_per = sum(
+            self.pb.ingredient_vars[k] * check_nan(self.pb.data.H2O[k]) / 100 for k in self.pb.data.Ingredients)
         ss_per = sum(check_nan(self.pb.data.SS[k]) * self.pb.ingredient_vars[k]
                      * (1 - check_nan(self.pb.data.H2O[k]) / 100) / 100 for k in self.pb.data.Ingredients) / (
                          1 - h20_per / 100)

@@ -20,9 +20,9 @@ class ObjectivePulpConstruct(PulpConstruct):
         pb.prob += lpSum(
             [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k]
              * (1 - check_nan(pb.data.H2O[k]) / 100) / 100 for k in pb.data.Ingredients]
-            + [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k] * pb.data.H2O[k] / 10000
+            + [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k] * check_nan(pb.data.H2O[k]) / 10000
                for k in pb.data.Ingredients]
-            + [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k] * pb.data.SS[k] / 10000
+            + [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k] * check_nan(pb.data.SS[k]) / 10000
                for k in pb.data.Ingredients]
         )
 
@@ -76,4 +76,3 @@ class SiObjectivePulpConstruct(PulpConstruct):
         pb.prob += lpSum([pb.ingredient_vars[k] * check_nan(fe[k])
                           * (100 - check_nan(pb.data.H2O[k])) / 100
                           for k in pb.data.Ingredients]) - (100 - pb.h_2_0)
-
