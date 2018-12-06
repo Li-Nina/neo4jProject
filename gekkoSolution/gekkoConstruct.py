@@ -95,7 +95,8 @@ class IngredientObjectiveConstruct(GekkoConstruct):
 class ObjectiveConstructBuilder(GekkoConstruct):
     def __init__(self, optimization_problem, *objectives):
         GekkoConstruct.__init__(self, optimization_problem)
-        self._obj = sum(objective[0].get_obj() * objective[1] for objective in objectives)
+        # 使用Intermediates分割函数，防止函数太长报错@error: Max Equation Length
+        self._obj = sum(self.pb.prob.Intermediate(objective[0].get_obj() * objective[1]) for objective in objectives)
 
     def get_obj(self):
         return self._obj
