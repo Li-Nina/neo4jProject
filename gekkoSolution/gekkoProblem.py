@@ -12,6 +12,11 @@ from utils.utils import check_nan
 
 logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
+'''
+    最大支持114个变量（项目）,100+个元素，执行时间约为28s
+    一般执行0.6s
+'''
+
 
 class GekkoProblem:
 
