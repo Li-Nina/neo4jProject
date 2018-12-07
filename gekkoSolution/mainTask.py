@@ -4,7 +4,7 @@ import time
 import traceback
 
 from gekkoSolution.gekkoConstruct import ObjectiveConstructBuilder, \
-    PriceObjectiveConstruct, IngredientObjectiveConstruct
+    PriceObjectiveConstruct, IngredientObjectiveConstruct, RObjectiveConstruct, SSObjectiveConstruct
 from gekkoSolution.gekkoProblem import GekkoProblem
 from gekkoSolution.gekkoUtils import cal_weights
 from utils.logger import Logger
@@ -24,7 +24,9 @@ try:
                                            (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
                                             weights['tfe']),
                                            (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
-                                            weights['sio2'])
+                                            weights['sio2']),
+                                           (RObjectiveConstruct(lp), 1),
+                                           (SSObjectiveConstruct(lp), 1)
                                            )
     lp.add_construct("objective", objectives)
 

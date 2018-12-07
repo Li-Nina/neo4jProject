@@ -99,7 +99,7 @@ class IngredientObjectiveConstruct(GekkoConstruct):
 
 
 class RObjectiveConstruct(GekkoConstruct):
-    def __init__(self, optimization_problem, maximum=False):
+    def __init__(self, optimization_problem, maximum=True):
         GekkoConstruct.__init__(self, optimization_problem)
         cao_index = self.pb.data.Ingredients_list_name_index.get('CaO'.lower())
         sio2_index = self.pb.data.Ingredients_list_name_index.get('SiO2'.lower())
