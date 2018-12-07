@@ -17,7 +17,7 @@ try:
     lp = GekkoProblem()
 
     # weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1000, 'R': 1, 'SS': 1})
-    weights = cal_weights(lp, **{'COST': 5400, 'R': 1})
+    weights = cal_weights(lp, **{'COST': 1, 'R': 1})
 
     lp.remove_construct("objective")
     objectives = ObjectiveConstructBuilder(lp,
