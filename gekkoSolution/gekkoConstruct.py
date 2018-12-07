@@ -4,8 +4,7 @@ import math
 
 from gekkoSolution.customException import NotFoundError
 from utils.logger import Logger
-
-from utils.utils import check_nan
+from utils.utils import check_nan, check_nan_or_zero
 
 logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
@@ -22,7 +21,10 @@ class GekkoConstruct:
 class SubjectiveConstruct(GekkoConstruct):
     def build(self):
         self.pb.prob.Equation(sum(self.pb.ingredient_vars[k] for k in self.pb.data.Ingredients) == 100)
-        for Element in self.pb.data.Ingredients_list:
+
+        elements_list = self.pb.data.Ingredients_list.copy()
+        elements_list.append(self.pb.data.SS)
+        for Element in elements_list:
             ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(Element[k])
                                  * (100 - check_nan(self.pb.data.H2O[k])) / 100
                                  for k in self.pb.data.Ingredients)
@@ -86,6 +88,60 @@ class IngredientObjectiveConstruct(GekkoConstruct):
         else:
             logger.error('ingredients ' + ingredient_name.lower() + ' not found!')
             raise NotFoundError('ingredients ' + ingredient_name.lower() + ' not found!')
+
+    def get_obj(self):
+        return self._obj
+
+
+'''
+    碱度R=CaO/SiO2，目标高碱度
+'''
+
+
+class RObjectiveConstruct(GekkoConstruct):
+    def __init__(self, optimization_problem, maximum=False):
+        GekkoConstruct.__init__(self, optimization_problem)
+        cao_index = self.pb.data.Ingredients_list_name_index.get('CaO'.lower())
+        sio2_index = self.pb.data.Ingredients_list_name_index.get('SiO2'.lower())
+        if cao_index is not None and sio2_index is not None:
+            logger.info('finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
+
+            cao_dic = self.pb.data.Ingredients_list[cao_index]
+            sio2_dic = self.pb.data.Ingredients_list[sio2_index]
+            r_dic = {
+                i: 0 if check_nan_or_zero(cao_dic[i]) or check_nan_or_zero(sio2_dic[i]) else cao_dic[i] / sio2_dic[i]
+                for i in self.pb.data.Ingredients
+            }
+            ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(r_dic[k])
+                                 * (100 - check_nan(self.pb.data.H2O[k])) / 100
+                                 for k in self.pb.data.Ingredients)
+            # 最小值
+            self._obj = ingredient_per / (100 - self.pb.h_2_0)
+            if maximum:
+                self._obj = -self._obj
+        else:
+            self._obj = 0
+            logger.error('R=CaO/SiO2 obj failed! finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
+
+    def get_obj(self):
+        return self._obj
+
+
+'''
+    烧损，目标低烧损
+'''
+
+
+class SSObjectiveConstruct(GekkoConstruct):
+    def __init__(self, optimization_problem, maximum=False):
+        GekkoConstruct.__init__(self, optimization_problem)
+        ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(self.pb.data.SS[k])
+                             * (100 - check_nan(self.pb.data.H2O[k])) / 100
+                             for k in self.pb.data.Ingredients)
+        # 最小值
+        self._obj = ingredient_per / (100 - self.pb.h_2_0)
+        if maximum:
+            self._obj = -self._obj
 
     def get_obj(self):
         return self._obj
