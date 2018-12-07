@@ -16,17 +16,18 @@ try:
 
     lp = GekkoProblem()
 
-    weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1})
+    # weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1000, 'R': 1, 'SS': 1})
+    weights = cal_weights(lp, **{'COST': 5400, 'R': 1})
 
     lp.remove_construct("objective")
     objectives = ObjectiveConstructBuilder(lp,
                                            (PriceObjectiveConstruct(lp), weights['cost']),
-                                           (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
-                                            weights['tfe']),
-                                           (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
-                                            weights['sio2']),
-                                           (RObjectiveConstruct(lp), 1),
-                                           (SSObjectiveConstruct(lp), 1)
+                                           # (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
+                                           #  weights['tfe']),
+                                           # (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
+                                           #  weights['sio2']),
+                                           (RObjectiveConstruct(lp), weights['r'])
+                                           # (SSObjectiveConstruct(lp), weights['ss'])
                                            )
     lp.add_construct("objective", objectives)
 

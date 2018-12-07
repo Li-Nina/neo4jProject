@@ -3,8 +3,9 @@
 import math
 
 from gekkoSolution.customException import NotFoundError
+from gekkoSolution.gekkoUtils import cal_weights
 from utils.logger import Logger
-from utils.utils import check_nan, check_nan_or_zero
+from utils.utils import check_nan
 
 logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
 
@@ -55,6 +56,11 @@ class VarGroupConstruct(GekkoConstruct):
 
 
 # 以下为目标函数
+'''
+    成本最低
+'''
+
+
 class PriceObjectiveConstruct(GekkoConstruct):
     def __init__(self, optimization_problem):
         GekkoConstruct.__init__(self, optimization_problem)
@@ -70,6 +76,12 @@ class PriceObjectiveConstruct(GekkoConstruct):
 
     def get_obj(self):
         return self._obj
+
+
+'''
+    对应某个元素求混合料该元素的最大目标或最小目标
+    :param ingredient_name:元素名称，如TFe，SiO2，Al2O3
+'''
 
 
 class IngredientObjectiveConstruct(GekkoConstruct):
@@ -99,29 +111,14 @@ class IngredientObjectiveConstruct(GekkoConstruct):
 
 
 class RObjectiveConstruct(GekkoConstruct):
-    def __init__(self, optimization_problem, maximum=True):
+    def __init__(self, optimization_problem):
         GekkoConstruct.__init__(self, optimization_problem)
-        cao_index = self.pb.data.Ingredients_list_name_index.get('CaO'.lower())
-        sio2_index = self.pb.data.Ingredients_list_name_index.get('SiO2'.lower())
-        if cao_index is not None and sio2_index is not None:
-            logger.info('finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
-
-            cao_dic = self.pb.data.Ingredients_list[cao_index]
-            sio2_dic = self.pb.data.Ingredients_list[sio2_index]
-            r_dic = {
-                i: 0 if check_nan_or_zero(cao_dic[i]) or check_nan_or_zero(sio2_dic[i]) else cao_dic[i] / sio2_dic[i]
-                for i in self.pb.data.Ingredients
-            }
-            ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(r_dic[k])
-                                 * (100 - check_nan(self.pb.data.H2O[k])) / 100
-                                 for k in self.pb.data.Ingredients)
-            # 最小值
-            self._obj = ingredient_per / (100 - self.pb.h_2_0)
-            if maximum:
-                self._obj = -self._obj
-        else:
-            self._obj = 0
-            logger.error('R=CaO/SiO2 obj failed! finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
+        cao = self.pb.prob.Intermediate(
+            IngredientObjectiveConstruct(optimization_problem, 'CaO', maximum=True).get_obj())
+        sio2 = self.pb.prob.Intermediate(
+            IngredientObjectiveConstruct(optimization_problem, 'SiO2', maximum=False).get_obj())
+        weight = cal_weights(optimization_problem, CaO=1, SiO2=1)
+        self._obj = cao * weight['cao'] + sio2 * weight['sio2']
 
     def get_obj(self):
         return self._obj
