@@ -51,9 +51,11 @@ try:
         print(lp.get_ingredient_result())
         print("objfcnval ============================================================> ", lp.get_objfcnval())
 
-        objfcnval = lp.get_objfcnval()
+        if objfcnval is None:  # 最优结果
+            lp.write_to_excel()
 
-    lp.write_to_excel()
+        objfcnval = lp.get_objfcnval()
+        lp.write_to_excel("../data/results/result" + str(i) + ".xlsx")
 
     end = time.time()
     logger.info("gekko_optimization task run successfully, runtime  is %s s:", end - start)
