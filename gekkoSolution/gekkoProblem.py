@@ -47,8 +47,8 @@ class GekkoProblem:
     def remove_construct(self, *keys):
         self._constructs = {k: v for k, v in self._constructs.items() if k not in keys}
 
-    def solve(self):
-        self.prob.solve()
+    def solve(self, disp=True, debug=1, gui=False, **kwargs):
+        self.prob.solve(disp, debug, gui, **kwargs)
 
     def print_solve(self):
         for k in self.data.Ingredients:
