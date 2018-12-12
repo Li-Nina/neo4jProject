@@ -2615,3 +2615,479 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 2018-12-11 19:00:50,660 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.9910450600602, 5.388872965434692, 2.7161060757750746, 0.7381126736548759, 2.8860775378837014, 0.048820256345068626, 0.06602810776608563, 0.1799999417483601]
 2018-12-11 19:00:50,660 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=444.2624698490393, wet_price=491.70603909070024, obj_price=529.8629882603908)
 2018-12-11 19:00:50,701 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 2.0209999084472656 s:
+2018-12-11 19:08:23,258 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-11 19:08:23,258 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost', 'r', 'ss'), (59.45, 5.0, 462.58579900551536, 0.4, 8.827051282051277), (1, 1, 1, 1, 1)]
+2018-12-11 19:08:23,258 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 0.5939000697342474, 'sio2': 7.061471829140202, 'cost': 0.07632607663617458, 'r': 88.26839786425252, 'ss': 3.9999041602368597}
+2018-12-11 19:08:23,259 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-11 19:08:23,259 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-11 19:08:23,518 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-11 19:08:23,518 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-11 19:08:23,520 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-11 19:08:23,520 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-11 19:08:23,589 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-11 19:08:23,590 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-11 19:08:23,591 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-11 19:08:23,592 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-11 19:08:23,916 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 54, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 11:45:07,262 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 11:45:07,278 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('tfe', 'sio2', 'cost', 'r', 'ss'), (59.45, 5.0, 462.58579900551536, 0.4, 8.827051282051277), (1, 1, 1, 1, 1)]
+2018-12-12 11:45:07,278 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'tfe': 0.5939000697342474, 'sio2': 7.061471829140202, 'cost': 0.07632607663617458, 'r': 88.26839786425252, 'ss': 3.9999041602368597}
+2018-12-12 11:45:07,918 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:45:07,918 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:45:07,934 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:45:07,934 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:45:07,996 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:45:07,996 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:45:07,996 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:45:07,996 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:45:08,293 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 54, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 11:46:06,995 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost',), (462.58579900551536,), (1,)]
+2018-12-12 11:46:06,995 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 100.0}
+2018-12-12 11:46:07,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:46:07,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:46:07,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:46:07,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:46:07,261 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:46:07,261 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:46:07,261 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:46:07,261 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:46:07,510 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 55, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 11:46:35,595 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost',), (462.58579900551536,), (1,)]
+2018-12-12 11:46:35,595 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 100.0}
+2018-12-12 11:46:35,798 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:46:35,798 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:46:35,798 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:46:35,798 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:46:35,876 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:46:35,876 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:46:35,876 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:46:35,876 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:46:36,141 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 55, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 11:48:13,547 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost',), (462.58579900551536,), (1,)]
+2018-12-12 11:48:13,547 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 100.0}
+2018-12-12 11:48:13,766 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:48:13,766 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:48:13,766 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:48:13,766 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:48:13,829 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:48:13,829 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:48:13,844 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:48:13,844 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:48:14,094 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 55, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 11:48:45,669 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost',), (462.58579900551536,), (1,)]
+2018-12-12 11:48:45,669 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 100.0}
+2018-12-12 11:48:45,872 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:48:45,872 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:48:45,872 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:48:45,872 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:48:45,934 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 11:48:45,934 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 11:48:45,950 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 11:48:45,950 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 11:48:46,215 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 55, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 13:46:44,212 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost',), (462.58579900551536,), (1,)]
+2018-12-12 13:46:44,212 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 100.0}
+2018-12-12 13:46:44,493 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:44,493 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:44,493 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 13:46:44,493 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 13:46:44,571 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.55647, 10.93681, 12.5228, 10.98436, 11.32197, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:44,571 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.55647]', '高品澳粉=[10.93681]', '高返=[12.5228]', '过筛镍矿=[10.98436]', '塞拉利昂粉=[11.32197]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:44,571 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.89999386094108, 5.49999959003092, 2.7113744342075954, 0.7318962628682169, 2.9999994647711556, 0.04881318304973097, 0.06794967025555855, 0.17291401558712707]
+2018-12-12 13:46:44,571 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=441.6314169759249, wet_price=488.7231928163761, obj_price=526.7948608678104)
+2018-12-12 13:46:44,820 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [11.07134, 10.97456, 12.5228, 9.126543, 12.62718, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:44,820 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[11.07134]', '高品澳粉=[10.97456]', '高返=[12.5228]', '过筛镍矿=[9.126543]', '塞拉利昂粉=[12.62718]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:44,820 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.04267223017937, 5.4999997580434306, 2.6986166139053243, 0.7161386972153361, 3.0000002860899158, 0.048594622551143656, 0.06850518518401556, 0.1432586239672203]
+2018-12-12 13:46:44,820 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=444.8704778158131, wet_price=490.10333712078307, obj_price=527.794943890263)
+2018-12-12 13:46:45,070 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [11.4417, 11.32585, 12.5228, 8.0, 13.23222, 39.79985, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:45,070 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[11.4417]', '高品澳粉=[11.32585]', '高返=[12.5228]', '过筛镍矿=[8.0]', '塞拉利昂粉=[13.23222]', 'FMG低品澳粉=[39.79985]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:45,070 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.14225609953964, 5.500000136371538, 2.6909971721774326, 0.7068394624677548, 2.990160824532394, 0.04845810239804475, 0.0687071021791532, 0.1253923948585779]
+2018-12-12 13:46:45,070 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=447.287554575927, wet_price=491.3818124391524, obj_price=528.7949227246204)
+2018-12-12 13:46:45,320 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [11.86499, 11.7863, 12.5228, 8.0, 13.50334, 38.645, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:45,320 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[11.86499]', '高品澳粉=[11.7863]', '高返=[12.5228]', '过筛镍矿=[8.0]', '塞拉利昂粉=[13.50334]', 'FMG低品澳粉=[38.645]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:45,335 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.16825118937457, 5.500000507674059, 2.69137096578948, 0.7071602113182894, 2.995869935037438, 0.048456383385638784, 0.06870531538742755, 0.12538794666371036]
+2018-12-12 13:46:45,335 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=448.34477772075985, wet_price=492.52578560175, obj_price=529.7949928188559)
+2018-12-12 13:46:45,585 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [12.14598, 12.3655, 12.5228, 8.0, 13.6401, 37.64804, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:46:45,585 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[12.14598]', '高品澳粉=[12.3655]', '高返=[12.5228]', '过筛镍矿=[8.0]', '塞拉利昂粉=[13.6401]', 'FMG低品澳粉=[37.64804]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:46:45,585 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.19569687662221, 5.492736785023974, 2.6918014661516407, 0.707547311037507, 2.9971176766451015, 0.0484535047559329, 0.06863297299590168, 0.12538049779025331]
+2018-12-12 13:46:45,585 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=449.3886873888511, wet_price=493.64323730520624, obj_price=530.7949251081404)
+2018-12-12 13:46:45,616 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.6224000453948975 s:
+2018-12-12 13:57:24,713 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 13:57:24,713 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('r',), (0.4,), (1,)]
+2018-12-12 13:57:24,713 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'r': 100.0}
+2018-12-12 13:57:24,713 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 13:57:24,713 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 13:57:24,916 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:24,916 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:24,916 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:24,916 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:24,994 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:24,994 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:24,994 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:24,994 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:25,072 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 70, in <module>
+    lp.write_to_excel("../data/results/result" + str(i) + ".xlsx")
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 96, in write_to_excel
+    self.data.write_to_excel(excel_file, prices)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\utils\excelParse.py", line 136, in write_to_excel
+    writer.save()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\pandas\io\excel.py", line 1732, in save
+    return self.book.close()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\xlsxwriter\workbook.py", line 306, in close
+    self._store_workbook()
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\xlsxwriter\workbook.py", line 655, in _store_workbook
+    allowZip64=self.allow_zip64)
+  File "C:\Users\sun\AppData\Local\Programs\Python\Python37-32\lib\zipfile.py", line 1182, in __init__
+    self.fp = io.open(file, filemode)
+PermissionError: [Errno 13] Permission denied: '../data/results/result0.xlsx'
+
+2018-12-12 13:57:39,720 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 13:57:39,720 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('r',), (0.4,), (1,)]
+2018-12-12 13:57:39,720 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'r': 100.0}
+2018-12-12 13:57:39,720 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 13:57:39,720 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 13:57:39,938 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:39,938 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:39,938 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:39,938 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:40,001 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:40,001 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:40,001 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:40,001 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:40,266 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.073862, 14.23223, 12.5228, 11.38471, 10.45804, 39.65078, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:40,266 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.073862]', '高品澳粉=[14.23223]', '高返=[12.5228]', '过筛镍矿=[11.38471]', '塞拉利昂粉=[10.45804]', 'FMG低品澳粉=[39.65078]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:40,266 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.941132225356654, 5.269579451750183, 2.717714824774078, 0.737544904333216, 2.9970881252130894, 0.04886385757830056, 0.06695124052408602, 0.17935174904646808]
+2018-12-12 13:57:40,266 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.6148168559594, wet_price=490.319942958054, obj_price=528.9215030925657)
+2018-12-12 13:57:40,516 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.238935, 14.67425, 12.5228, 11.42963, 9.456805, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:40,516 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.238935]', '高品澳粉=[14.67425]', '高返=[12.5228]', '过筛镍矿=[11.42963]', '塞拉利昂粉=[9.456805]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:40,516 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.95947426097798, 5.303726528720405, 2.7173736642543145, 0.7380633923521126, 2.949919637109411, 0.04884920449006647, 0.06650569912802982, 0.17999993958495009]
+2018-12-12 13:57:40,516 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.15522663031055, wet_price=490.7713836154864, obj_price=529.2520563251694)
+2018-12-12 13:57:40,765 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.555344, 14.99999, 12.5228, 11.43319, 8.811099, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:40,765 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.555344]', '高品澳粉=[14.99999]', '高返=[12.5228]', '过筛镍矿=[11.43319]', '塞拉利昂粉=[8.811099]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:40,765 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.97926024107174, 5.337473799841657, 2.716872530911555, 0.7381928704504979, 2.915995213722272, 0.04883410633577087, 0.06621098059402289, 0.17999992141945534]
+2018-12-12 13:57:40,765 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.8058047903108, wet_price=491.3399564007636, obj_price=529.6737346552425)
+2018-12-12 13:57:41,015 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.892399, 14.99996, 12.5228, 11.43534, 8.471925, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:41,015 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.892399]', '高品澳粉=[14.99996]', '高返=[12.5228]', '过筛镍矿=[11.43534]', '塞拉利昂粉=[8.471925]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:41,015 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.98699774178913, 5.371216016183139, 2.7163694146464152, 0.7381402386163642, 2.896356994840061, 0.04882501557164709, 0.0660909520492874, 0.17999999518698448]
+2018-12-12 13:57:41,015 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=444.1055366072557, wet_price=491.58026354106846, obj_price=529.7979835663567)
+2018-12-12 13:57:41,062 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.5443997383117676 s:
+2018-12-12 13:57:54,224 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 13:57:54,224 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('r',), (0.4,), (1,)]
+2018-12-12 13:57:54,224 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'r': 100.0}
+2018-12-12 13:57:54,224 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 13:57:54,224 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 13:57:54,442 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:54,442 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:54,442 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:54,442 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:54,505 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:54,505 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:54,505 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 13:57:54,505 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 13:57:54,754 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.073862, 14.23223, 12.5228, 11.38471, 10.45804, 39.65078, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:54,754 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.073862]', '高品澳粉=[14.23223]', '高返=[12.5228]', '过筛镍矿=[11.38471]', '塞拉利昂粉=[10.45804]', 'FMG低品澳粉=[39.65078]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:54,754 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.941132225356654, 5.269579451750183, 2.717714824774078, 0.737544904333216, 2.9970881252130894, 0.04886385757830056, 0.06695124052408602, 0.17935174904646808]
+2018-12-12 13:57:54,754 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.6148168559594, wet_price=490.319942958054, obj_price=528.9215030925657)
+2018-12-12 13:57:55,004 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.238935, 14.67425, 12.5228, 11.42963, 9.456805, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:55,004 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.238935]', '高品澳粉=[14.67425]', '高返=[12.5228]', '过筛镍矿=[11.42963]', '塞拉利昂粉=[9.456805]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:55,004 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.95947426097798, 5.303726528720405, 2.7173736642543145, 0.7380633923521126, 2.949919637109411, 0.04884920449006647, 0.06650569912802982, 0.17999993958495009]
+2018-12-12 13:57:55,004 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.15522663031055, wet_price=490.7713836154864, obj_price=529.2520563251694)
+2018-12-12 13:57:55,253 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.555344, 14.99999, 12.5228, 11.43319, 8.811099, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:55,253 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.555344]', '高品澳粉=[14.99999]', '高返=[12.5228]', '过筛镍矿=[11.43319]', '塞拉利昂粉=[8.811099]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:55,253 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.97926024107174, 5.337473799841657, 2.716872530911555, 0.7381928704504979, 2.915995213722272, 0.04883410633577087, 0.06621098059402289, 0.17999992141945534]
+2018-12-12 13:57:55,253 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.8058047903108, wet_price=491.3399564007636, obj_price=529.6737346552425)
+2018-12-12 13:57:55,519 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.892399, 14.99996, 12.5228, 11.43534, 8.471925, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 13:57:55,519 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.892399]', '高品澳粉=[14.99996]', '高返=[12.5228]', '过筛镍矿=[11.43534]', '塞拉利昂粉=[8.471925]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 13:57:55,519 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.98699774178913, 5.371216016183139, 2.7163694146464152, 0.7381402386163642, 2.896356994840061, 0.04882501557164709, 0.0660909520492874, 0.17999999518698448]
+2018-12-12 13:57:55,519 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=444.1055366072557, wet_price=491.58026354106846, obj_price=529.7979835663567)
+2018-12-12 13:57:55,550 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.5443999767303467 s:
+2018-12-12 14:04:37,372 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:04:37,372 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('r',), (0.4,), (1,)]
+2018-12-12 14:04:37,372 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'r': 100.0}
+2018-12-12 14:04:37,372 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:04:37,372 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:04:37,574 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:37,574 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:37,590 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:04:37,590 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:04:37,652 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:37,652 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:37,652 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:04:37,652 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:04:37,902 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.006463, 14.92239, 12.5228, 11.42122, 10.50732, 38.94222, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:37,902 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.006463]', '高品澳粉=[14.92239]', '高返=[12.5228]', '过筛镍矿=[11.42122]', '塞拉利昂粉=[10.50732]', 'FMG低品澳粉=[38.94222]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:37,902 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.962803696446144, 5.240383239164871, 2.7186364538327834, 0.7383292410234631, 2.9996913010833484, 0.048867448597359954, 0.0668238286963957, 0.17993569178812466]
+2018-12-12 14:04:37,902 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3805443124085, wet_price=491.20429678819664, obj_price=529.7875088653032)
+2018-12-12 14:04:38,152 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.004413, 14.91317, 12.5228, 11.40482, 10.43972, 39.03751, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:38,152 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.004413]', '高品澳粉=[14.91317]', '高返=[12.5228]', '过筛镍矿=[11.40482]', '塞拉利昂粉=[10.43972]', 'FMG低品澳粉=[39.03751]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:38,152 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.96368393105215, 5.243405449275221, 2.7184450508589624, 0.7381710501013306, 2.9962168417579416, 0.04886427847080497, 0.06680308858979742, 0.17966765385759653]
+2018-12-12 14:04:38,152 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3798866132011, wet_price=491.17170281643877, obj_price=529.750208812629)
+2018-12-12 14:04:38,417 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.006626, 14.86975, 12.5228, 11.39461, 10.40279, 39.12585, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:38,417 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.006626]', '高品澳粉=[14.86975]', '高返=[12.5228]', '过筛镍矿=[11.39461]', '塞拉利昂粉=[10.40279]', 'FMG低品澳粉=[39.12585]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:38,417 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.96287941129185, 5.246536948981913, 2.718297806535845, 0.7380481946247106, 2.994325117619705, 0.04886249629041072, 0.06679974793893348, 0.1795015038920232]
+2018-12-12 14:04:38,417 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3357496148537, wet_price=491.1048960456845, obj_price=529.6822238825873)
+2018-12-12 14:04:38,666 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.008845, 14.82634, 12.5228, 11.3844, 10.36586, 39.21419, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:04:38,666 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.008845]', '高品澳粉=[14.82634]', '高返=[12.5228]', '过筛镍矿=[11.3844]', '塞拉利昂粉=[10.36586]', 'FMG低品澳粉=[39.21419]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:04:38,666 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.96208568636977, 5.249669261952491, 2.718150617692022, 0.7379253664833425, 2.992433834191811, 0.04886071482995689, 0.06679641454252111, 0.17933536821096766]
+2018-12-12 14:04:38,666 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.2917002334562, wet_price=491.038197130802, obj_price=529.6143589005516)
+2018-12-12 14:04:38,698 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.5443997383117676 s:
+2018-12-12 14:13:14,411 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:13:14,411 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1, 1)]
+2018-12-12 14:13:14,411 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 0.08639573845659897, 'r': 99.9136042615434}
+2018-12-12 14:13:14,411 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:13:14,411 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:13:14,630 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:14,630 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:14,630 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:13:14,630 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:13:14,708 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:14,708 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:14,708 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:13:14,708 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:13:14,973 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.075453, 14.23353, 12.5228, 11.38475, 10.45787, 39.64801, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:14,973 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.075453]', '高品澳粉=[14.23353]', '高返=[12.5228]', '过筛镍矿=[11.38475]', '塞拉利昂粉=[10.45787]', 'FMG低品澳粉=[39.64801]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:14,973 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.94120764823564, 5.269639165886422, 2.7177150477873666, 0.7375459877907274, 2.99705779111947, 0.04886383725558588, 0.0669508986590692, 0.1793522997284204]
+2018-12-12 14:13:14,973 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.6179943155899, wet_price=490.3232589571101, obj_price=528.9242516665747)
+2018-12-12 14:13:15,223 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.229439, 14.84015, 12.5228, 11.43036, 9.300255, 39.99942, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:15,223 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.229439]', '高品澳粉=[14.84015]', '高返=[12.5228]', '过筛镍矿=[11.43036]', '塞拉利昂粉=[9.300255]', 'FMG低品澳粉=[39.99942]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:15,223 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965633042091255, 5.303802217751057, 2.71737383714432, 0.7381561272233672, 2.9426145904280183, 0.04884612982614759, 0.06641659547741478, 0.1800000171761078]
+2018-12-12 14:13:15,223 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.33488368076536, wet_price=490.93944183427055, obj_price=529.4040896998011)
+2018-12-12 14:13:15,490 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.55628, 14.99999, 12.5228, 11.4332, 8.810156, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:15,490 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.55628]', '高品澳粉=[14.99999]', '高返=[12.5228]', '过筛镍矿=[11.4332]', '塞拉利昂粉=[8.810156]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:15,490 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.9792833656329, 5.337567701562376, 2.7168711699485346, 0.7381927612449077, 2.915940805470727, 0.048834081708529535, 0.0662106482501228, 0.17999998686836519]
+2018-12-12 14:13:15,490 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.8066445776581, wet_price=491.3406383489245, obj_price=529.6740978075318)
+2018-12-12 14:13:15,758 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.893591, 14.99996, 12.5228, 11.43535, 8.470723, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:13:15,758 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.893591]', '高品澳粉=[14.99996]', '高返=[12.5228]', '过筛镍矿=[11.43535]', '塞拉利昂粉=[8.470723]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:13:15,758 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.98702493533877, 5.371335390221368, 2.7163676512155464, 0.7381400729128839, 2.8962875101555534, 0.04882498368958359, 0.0660905265909904, 0.1800000338439716]
+2018-12-12 14:13:15,758 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=444.10659319286486, wet_price=491.5811120793973, obj_price=529.7984218726342)
+2018-12-12 14:13:15,805 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.611800193786621 s:
+2018-12-12 14:18:49,999 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:18:49,999 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1, 1)]
+2018-12-12 14:18:49,999 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 0.08639573845659897, 'r': 99.9136042615434}
+2018-12-12 14:18:49,999 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:18:49,999 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:18:50,311 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:50,311 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:50,311 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:18:50,311 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:18:50,374 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 15.0, 12.5228, 11.42524, 10.51358, 38.8608, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:50,374 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[15.0]', '高返=[12.5228]', '过筛镍矿=[11.42524]', '塞拉利昂粉=[10.51358]', 'FMG低品澳粉=[38.8608]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:50,374 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.965275794663775, 5.237141189115701, 2.718739487947406, 0.7384167601515534, 2.999999877463383, 0.04886784194936254, 0.06680975728274544, 0.17999998546540857]
+2018-12-12 14:18:50,374 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.46804532011623, wet_price=491.30519046176016, obj_price=529.8860205684502)
+2018-12-12 14:18:50,639 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.006587, 14.92251, 12.5228, 11.42125, 10.50725, 38.94203, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:50,639 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.006587]', '高品澳粉=[14.92251]', '高返=[12.5228]', '过筛镍矿=[11.42125]', '塞拉利昂粉=[10.50725]', 'FMG低品澳粉=[38.94203]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:50,639 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.962817838306314, 5.240390104781537, 2.718636670006782, 0.738329572781346, 2.9996874532692344, 0.04886745004068899, 0.06682378498895203, 0.1799361660937136]
+2018-12-12 14:18:50,639 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3808353822487, wet_price=491.2046337613263, obj_price=529.7878159197584)
+2018-12-12 14:18:50,904 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.004197, 14.92717, 12.5228, 11.40663, 10.42602, 39.0356, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:50,904 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.004197]', '高品澳粉=[14.92717]', '高返=[12.5228]', '过筛镍矿=[11.40663]', '塞拉利昂粉=[10.42602]', 'FMG低品澳粉=[39.0356]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:50,904 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.96408259948009, 5.243445105652627, 2.7184572008393673, 0.7381938797706185, 2.9956189782500426, 0.04886422593638838, 0.06679527282853262, 0.17969575462372495]
+2018-12-12 14:18:50,904 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.39317354849726, wet_price=491.18589386858787, obj_price=529.7631114056518)
+2018-12-12 14:18:51,169 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.006303, 14.89076, 12.5228, 11.39732, 10.38224, 39.12299, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:51,169 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.006303]', '高品澳粉=[14.89076]', '高返=[12.5228]', '过筛镍矿=[11.39732]', '塞拉利昂粉=[10.38224]', 'FMG低品澳粉=[39.12299]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:51,169 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.96348517807581, 5.246596908726935, 2.718316029109223, 0.7380824096981492, 2.993428459663554, 0.04886241728618638, 0.06678802923472442, 0.17954357482630273]
+2018-12-12 14:18:51,169 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3557477084103, wet_price=491.12625483337786, obj_price=529.7016595121431)
+2018-12-12 14:18:51,434 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.008414, 14.85435, 12.5228, 11.38802, 10.33847, 39.21038, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:18:51,434 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.008414]', '高品澳粉=[14.85435]', '高返=[12.5228]', '过筛镍矿=[11.38802]', '塞拉利昂粉=[10.33847]', 'FMG低品澳粉=[39.21038]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:18:51,434 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.962903170010414, 5.249749843664315, 2.7181750112462177, 0.737971054500904, 2.9912394016300445, 0.04886061123897073, 0.06678080325501126, 0.1793915716677378]
+2018-12-12 14:18:51,434 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=443.3184223090122, wet_price=491.06675628710747, obj_price=529.6403723996808)
+2018-12-12 14:18:51,481 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.7004001140594482 s:
+2018-12-12 14:26:00,514 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:26:00,514 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:26:00,514 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:26:00,530 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:26:00,530 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:26:00,748 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:26:00,748 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:26:00,748 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:26:00,748 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:26:00,826 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:26:00,826 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:26:00,826 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:26:00,826 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:26:01,076 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 56, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 14:27:26,979 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:27:26,979 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:27:26,979 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:27:26,979 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:27:26,979 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:27:27,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:27:27,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:27:27,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:27:27,198 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:27:27,276 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:27:27,276 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:27:27,276 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:27:27,276 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:27:27,541 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 56, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 14:29:36,994 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:29:36,994 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:29:36,994 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:29:36,994 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:29:36,994 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:29:37,212 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:37,212 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:37,212 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:29:37,212 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:29:37,290 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:37,290 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:37,290 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:29:37,290 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:29:37,556 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.237801, 14.99954, 12.5228, 8.017757, 12.69013, 39.8544, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:37,556 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.237801]', '高品澳粉=[14.99954]', '高返=[12.5228]', '过筛镍矿=[8.017757]', '塞拉利昂粉=[12.69013]', 'FMG低品澳粉=[39.8544]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:37,556 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.20798729191287, 5.207317911150676, 2.6955010101782997, 0.7094962240740603, 2.9994922850348003, 0.04847174640847577, 0.0677767360226811, 0.12570304871418228]
+2018-12-12 14:29:37,556 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=448.5638441542192, wet_price=492.92267023763213, obj_price=531.0015387113043)
+2018-12-12 14:29:37,821 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [9.106115, 14.9995, 12.5228, 8.022962, 12.9371, 38.73394, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:37,821 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[9.106115]', '高品澳粉=[14.9995]', '高返=[12.5228]', '过筛镍矿=[8.022962]', '塞拉利昂粉=[12.9371]', 'FMG低品澳粉=[38.73394]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:37,821 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.22627690582272, 5.250134635151183, 2.6952539315482893, 0.7095317708524086, 2.9995449023355554, 0.048467252183067036, 0.06785895854924896, 0.12577209729878547]
+2018-12-12 14:29:37,821 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=449.4836745873153, wet_price=493.8876666676157, obj_price=531.7227654049722)
+2018-12-12 14:29:38,086 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [9.975102, 14.99944, 12.5228, 8.028771, 13.18405, 37.61226, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:38,086 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[9.975102]', '高品澳粉=[14.99944]', '高返=[12.5228]', '过筛镍矿=[8.028771]', '塞拉利昂粉=[13.18405]', 'FMG低品澳粉=[37.61226]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:38,086 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.244545719876825, 5.292979502722667, 2.6950109234997495, 0.7095724100312908, 2.9996052832034192, 0.04846282766719897, 0.06794113426566724, 0.12585067609941614]
+2018-12-12 14:29:38,086 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=450.40343397952887, wet_price=494.85310941047754, obj_price=532.4435325558592)
+2018-12-12 14:29:38,382 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [10.84475, 14.99928, 12.5228, 8.035158, 13.43097, 36.48947, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:29:38,382 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[10.84475]', '高品澳粉=[14.99928]', '高返=[12.5228]', '过筛镍矿=[8.035158]', '塞拉利昂粉=[13.43097]', 'FMG低品澳粉=[36.48947]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:29:38,382 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [56.2627809965889, 5.335854142792585, 2.694771682359076, 0.709617852704788, 2.999672131705411, 0.048458469063394176, 0.06802326786551018, 0.12593837001346697]
+2018-12-12 14:29:38,382 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=451.32296445014407, wet_price=495.8187905469753, obj_price=533.1636195063168)
+2018-12-12 14:29:38,414 __main__ mainTask INFO = gekko_optimization task run successfully, runtime  is 1.6379997730255127 s:
+2018-12-12 14:34:54,307 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:34:54,307 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:34:54,307 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:34:54,307 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:34:54,307 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:34:54,525 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:34:54,525 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:34:54,525 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:34:54,525 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:34:54,712 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:34:54,712 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:34:54,712 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:34:54,712 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:34:54,977 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 56, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 14:37:24,958 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:37:24,958 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:37:24,958 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:37:24,958 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:37:24,958 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:37:25,192 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:37:25,192 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:37:25,192 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:37:25,192 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:37:25,254 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:37:25,254 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:37:25,254 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:37:25,254 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:37:25,519 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 57, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
+2018-12-12 14:42:00,033 gekkoSolution.gekkoUtils gekkoUtils INFO = _cal_scalar_r finding cao_index is 2, sio2_index is 1
+2018-12-12 14:42:00,033 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cost', 'r'), (462.58579900551536, 0.4), (1000, 1)]
+2018-12-12 14:42:00,033 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cost': 46.37219862199962, 'r': 53.627801378000385}
+2018-12-12 14:42:00,033 gekkoSolution.gekkoUtils gekkoUtils INFO = name_scalar_weight is [('cao', 'sio2'), (2.0, 5.0), (1, 1)]
+2018-12-12 14:42:00,033 gekkoSolution.gekkoUtils gekkoUtils INFO = name_normalization_weight is {'cao': 71.42857142857143, 'sio2': 28.571428571428573}
+2018-12-12 14:42:00,283 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:42:00,283 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:42:00,283 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:42:00,283 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:42:00,361 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization result is: [8.0, 13.91427, 12.5228, 11.4245, 10.46085, 40.0, 0.6015498, 2.504559, 0.5714713]
+2018-12-12 14:42:00,361 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization name_result is: ['巴西粗粉=[8.0]', '高品澳粉=[13.91427]', '高返=[12.5228]', '过筛镍矿=[11.4245]', '塞拉利昂粉=[10.46085]', 'FMG低品澳粉=[40.0]', '铁泥=[0.6015498]', '干渣粉=[2.504559]', '重力除尘灰=[0.5714713]']
+2018-12-12 14:42:00,361 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization ingredient_result_list is: [55.924760558642014, 5.274970149791958, 2.7177975913996026, 0.7376830314837546, 2.9999999082815703, 0.04887097195789011, 0.06701576110056458, 0.17999994526968896]
+2018-12-12 14:42:00,361 gekkoSolution.gekkoProblem gekkoProblem INFO = optimization prices is: Prices(dry_price=442.0814476384141, wet_price=489.8003896542826, obj_price=528.4514636077904)
+2018-12-12 14:42:00,626 __main__ mainTask ERROR = Traceback (most recent call last):
+  File "C:/Users/sun/PycharmProjects/optimizationproblem/gekkoSolution/mainTask.py", line 59, in <module>
+    lp.solve(disp=True)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\gekkoSolution\gekkoProblem.py", line 51, in solve
+    self.prob.solve(disp, debug, gui, **kwargs)
+  File "C:\Users\sun\PycharmProjects\optimizationproblem\venv\lib\site-packages\gekko\gekko.py", line 682, in solve
+    raise Exception(apm_error)
+Exception:  @error: Solution Not Found
+
+
