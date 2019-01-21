@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import logging
 import math
 
-from gekkoSolution.customException import NotFoundError, NumberError
-from utils.logger import Logger
-from utils.utils import check_nan
 import numpy as np
 
-logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
+from gekkoSolution.customException import NotFoundError, NumberError
+from utils.const import GEKKO_LOG_NAME
+from utils.utils import check_nan
+
+logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
 
 
 def cal_weights(pb, **kw):

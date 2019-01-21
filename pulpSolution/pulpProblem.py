@@ -3,14 +3,13 @@
 from collections import namedtuple
 
 from pulp import *
-
 from pulpSolution.pulpConstruct import ObjectivePulpConstruct, SubjectivePulpConstruct, VarPulpConstruct, \
     VarGroupPulpConstruct
+from utils.const import PULP_LOG_NAME
 from utils.excelParse import ExcelParse
-from utils.logger import Logger
 from utils.utils import check_nan
 
-logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
+logger = logging.getLogger(PULP_LOG_NAME + "." + __name__)
 
 
 class PulpProblem:

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import logging
 import math
 
 from gekkoSolution.customException import NotFoundError
 from gekkoSolution.gekkoUtils import cal_weights
-from utils.logger import Logger
+from utils.const import GEKKO_LOG_NAME
 from utils.utils import check_nan
 
-logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
+logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
 
 
 # 多目标使用线性加权法

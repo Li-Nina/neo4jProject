@@ -1,18 +1,4 @@
-2018-12-05 12:07:16,023 pulpSolution.pulpProblem pulpProblem INFO = optimization result is: [9.0240542, 12.657859, 12.522797, 11.425055, 10.692654, 40.0, 0.60154981, 2.5045594, 0.57147126]
-2018-12-05 12:07:16,023 pulpSolution.pulpProblem pulpProblem INFO = optimization name_result is: ['巴西粗粉=9.0240542', '高品澳粉=12.657859', '高返=12.522797', '过筛镍矿=11.425055', '塞拉利昂粉=10.692654', 'FMG低品澳粉=40.0', '铁泥=0.60154981', '干渣粉=2.5045594', '重力除尘灰=0.57147126']
-2018-12-05 12:07:16,026 pulpSolution.pulpProblem pulpProblem INFO = optimization ingredient_result_list is: [55.89999979299971, 5.369647952730806, 2.7163775410536792, 0.7368324361060133, 3.000000002252146, 0.04886862143994527, 0.06735284803531229, 0.1799999999708083]
-2018-12-05 12:07:16,026 pulpSolution.pulpProblem pulpProblem INFO = optimization prices is: Prices(dry_price=441.5683305871572, wet_price=489.2084530841882, obj_price=527.6535190488044)
-2018-12-05 12:58:19,198 __main__ mainTask ERROR = Traceback (most recent call last):
-  File "C:/Users/sun/PycharmProjects/optimizationproblem/pulpSolution/mainTask.py", line 29, in <module>
-    lp.write_to_excel()
-  File "C:\Users\sun\PycharmProjects\optimizationproblem\pulpSolution\pulpProblem.py", line 98, in write_to_excel
-    raise Exception("Solution Not Found!")
-Exception: Solution Not Found!
-
-2018-12-06 15:52:43,206 __main__ mainTask ERROR = Traceback (most recent call last):
-  File "C:/Users/sun/PycharmProjects/optimizationproblem/pulpSolution/mainTask.py", line 28, in <module>
-    lp.write_to_excel()
-  File "C:\Users\sun\PycharmProjects\optimizationproblem\pulpSolution\pulpProblem.py", line 99, in write_to_excel
-    raise Exception("Solution Not Found!")
-Exception: Solution Not Found!
-
+2019-01-21 19:48:58,174 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization result is: [10.556471, 10.936812, 12.522797, 10.984365, 11.321974, 40.0, 0.60154981, 2.5045594, 0.57147126]
+2019-01-21 19:48:58,174 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization name_result is: ['巴西粗粉=10.556471', '高品澳粉=10.936812', '高返=12.522797', '过筛镍矿=10.984365', '塞拉利昂粉=11.321974', 'FMG低品澳粉=40.0', '铁泥=0.60154981', '干渣粉=2.5045594', '重力除尘灰=0.57147126']
+2019-01-21 19:48:58,176 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization ingredient_result_list is: [55.89999963884954, 5.499999986857325, 2.7113742919369614, 0.7318962508832324, 2.9999999820551166, 0.04881317454623574, 0.06794967810629209, 0.17291409764047702]
+2019-01-21 19:48:58,176 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization prices is: Prices(dry_price=441.63145113651217, wet_price=488.7232427927203, obj_price=526.7949214537869)

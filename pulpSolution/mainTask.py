@@ -3,17 +3,17 @@
 import traceback
 
 # lp = MinPriceProblem("../data/template.xlsx")
-from pulpSolution.pulpConstruct import FeObjectivePulpConstruct
 from pulpSolution.pulpProblem import PulpProblem
+from utils.const import PULP_LOG_NAME
 from utils.logger import Logger
 
-logger = Logger(__name__, log_file_path='../log/pulp_optimization.log').get()
+logger = Logger(PULP_LOG_NAME, log_file_path='../log/pulp_optimization.log').get()
 
 try:
     lp = PulpProblem()
     # lp.prob = LpProblem("maxPro", LpMaximize)
     # lp.remove_construct("objective")
-    lp.add_construct("objective", FeObjectivePulpConstruct())
+    # lp.add_construct("objective", FeObjectivePulpConstruct())
     # lp.add_construct("objective", SiObjectiveConstruct())
     lp.build()
     print(lp.prob)

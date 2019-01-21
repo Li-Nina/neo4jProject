@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import logging
 from collections import namedtuple
 
 from gekko import GEKKO
 
 from gekkoSolution.gekkoConstruct import PriceObjectiveConstruct, SubjectiveConstruct, VarConstruct, \
     VarGroupConstruct, ObjectiveConstructBuilder
+from utils.const import GEKKO_LOG_NAME
 from utils.excelParse import ExcelParse
-from utils.logger import Logger
 from utils.utils import check_nan
 
-logger = Logger(__name__, log_file_path='../log/gekko_optimization.log').get()
+logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
 
 '''
     最大支持114个变量（项目）,100+个元素，执行时间约为28s
