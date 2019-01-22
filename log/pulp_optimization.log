@@ -1,4 +1,0 @@
-2019-01-21 19:48:58,174 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization result is: [10.556471, 10.936812, 12.522797, 10.984365, 11.321974, 40.0, 0.60154981, 2.5045594, 0.57147126]
-2019-01-21 19:48:58,174 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization name_result is: ['巴西粗粉=10.556471', '高品澳粉=10.936812', '高返=12.522797', '过筛镍矿=10.984365', '塞拉利昂粉=11.321974', 'FMG低品澳粉=40.0', '铁泥=0.60154981', '干渣粉=2.5045594', '重力除尘灰=0.57147126']
-2019-01-21 19:48:58,176 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization ingredient_result_list is: [55.89999963884954, 5.499999986857325, 2.7113742919369614, 0.7318962508832324, 2.9999999820551166, 0.04881317454623574, 0.06794967810629209, 0.17291409764047702]
-2019-01-21 19:48:58,176 pulp.pulpSolution.pulpProblem pulpProblem INFO = optimization prices is: Prices(dry_price=441.63145113651217, wet_price=488.7232427927203, obj_price=526.7949214537869)
