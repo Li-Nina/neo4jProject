@@ -3,16 +3,16 @@
 import logging
 import math
 
-from gekkoSolution.customException import NotFoundError
-from gekkoSolution.gekkoUtils import cal_weights
-from utils.const import GEKKO_LOG_NAME
+from ratioSolution.customException import NotFoundError
+from ratioSolution.utils import cal_weights
+from serverWeb.config import APP_LOG_NAME
 from utils.utils import check_nan
 
-logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
+logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
 # 多目标使用线性加权法
-class GekkoConstruct:
+class Construct:
     def __init__(self, optimization_problem):
         self.pb = optimization_problem
 
@@ -20,7 +20,7 @@ class GekkoConstruct:
         pass
 
 
-class SubjectiveConstruct(GekkoConstruct):
+class SubjectiveConstruct(Construct):
     def build(self):
         self.pb.prob.Equation(sum(self.pb.ingredient_vars[k] for k in self.pb.data.Ingredients) == 100)
 
@@ -36,7 +36,7 @@ class SubjectiveConstruct(GekkoConstruct):
                 self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0))
 
 
-class VarConstruct(GekkoConstruct):
+class VarConstruct(Construct):
     def build(self):
         for k in self.pb.data.Ingredients:
             if not math.isnan(self.pb.data.UP[k]):
@@ -45,7 +45,7 @@ class VarConstruct(GekkoConstruct):
                 self.pb.prob.Equation(self.pb.ingredient_vars[k] >= self.pb.data.Down[k])
 
 
-class VarGroupConstruct(GekkoConstruct):
+class VarGroupConstruct(Construct):
     def build(self):
         for g in self.pb.data.Group.values():
             up = self.pb.data.Group_up[g[0]]
@@ -62,9 +62,9 @@ class VarGroupConstruct(GekkoConstruct):
 '''
 
 
-class PriceObjectiveConstruct(GekkoConstruct):
+class PriceObjectiveConstruct(Construct):
     def __init__(self, optimization_problem):
-        GekkoConstruct.__init__(self, optimization_problem)
+        Construct.__init__(self, optimization_problem)
         dry_price = sum(check_nan(self.pb.data.Cost[k]) * self.pb.ingredient_vars[k]
                         * (1 - check_nan(self.pb.data.H2O[k]) / 100) / 100 for k in self.pb.data.Ingredients)
         h20_per = sum(
@@ -85,9 +85,9 @@ class PriceObjectiveConstruct(GekkoConstruct):
 '''
 
 
-class IngredientObjectiveConstruct(GekkoConstruct):
+class IngredientObjectiveConstruct(Construct):
     def __init__(self, optimization_problem, ingredient_name, maximum=False):
-        GekkoConstruct.__init__(self, optimization_problem)
+        Construct.__init__(self, optimization_problem)
         index = self.pb.data.Ingredients_list_name_index.get(ingredient_name.lower())
         if index is not None:
             ingredient = self.pb.data.Ingredients_list[index]
@@ -111,9 +111,9 @@ class IngredientObjectiveConstruct(GekkoConstruct):
 '''
 
 
-class RObjectiveConstruct(GekkoConstruct):
+class RObjectiveConstruct(Construct):
     def __init__(self, optimization_problem):
-        GekkoConstruct.__init__(self, optimization_problem)
+        Construct.__init__(self, optimization_problem)
         cao = self.pb.prob.Intermediate(
             IngredientObjectiveConstruct(optimization_problem, 'CaO', maximum=True).get_obj())
         sio2 = self.pb.prob.Intermediate(
@@ -130,9 +130,9 @@ class RObjectiveConstruct(GekkoConstruct):
 '''
 
 
-class SSObjectiveConstruct(GekkoConstruct):
+class SSObjectiveConstruct(Construct):
     def __init__(self, optimization_problem, maximum=False):
-        GekkoConstruct.__init__(self, optimization_problem)
+        Construct.__init__(self, optimization_problem)
         ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(self.pb.data.SS[k])
                              * (100 - check_nan(self.pb.data.H2O[k])) / 100
                              for k in self.pb.data.Ingredients)
@@ -146,9 +146,9 @@ class SSObjectiveConstruct(GekkoConstruct):
 
 
 # 目标函数生成器，传入多个目标与权重的元组 eg:(obj1,0.5),(obj2,0.3),(obj3,0.2)
-class ObjectiveConstructBuilder(GekkoConstruct):
+class ObjectiveConstructBuilder(Construct):
     def __init__(self, optimization_problem, *objectives):
-        GekkoConstruct.__init__(self, optimization_problem)
+        Construct.__init__(self, optimization_problem)
         # 使用Intermediates分割函数，防止函数太长报错@error: Max Equation Length
         self._obj = sum(self.pb.prob.Intermediate(objective[0].get_obj() * objective[1]) for objective in objectives)
 

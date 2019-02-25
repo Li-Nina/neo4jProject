@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import logging
 import traceback
 
 # lp = MinPriceProblem("../data/template.xlsx")
-from pulpSolution.pulpProblem import PulpProblem
-from utils.const import PULP_LOG_NAME
-from utils.logger import Logger
+from ratioPPSolution.ppProblem import PPProblem
+from serverWeb.config import APP_LOG_NAME
 
-logger = Logger(PULP_LOG_NAME, log_file_path='../log/pulp_optimization.log').get()
+logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 try:
-    lp = PulpProblem()
+    lp = PPProblem()
     # lp.prob = LpProblem("maxPro", LpMaximize)
     # lp.remove_construct("objective")
     # lp.add_construct("objective", FeObjectivePulpConstruct())

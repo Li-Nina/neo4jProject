@@ -7,7 +7,7 @@ from pulp import lpSum
 from utils.utils import check_nan
 
 
-class PulpConstruct:
+class PPConstruct:
     def __init__(self):
         pass
 
@@ -15,7 +15,7 @@ class PulpConstruct:
         pass
 
 
-class ObjectivePulpConstruct(PulpConstruct):
+class ObjectivePPConstruct(PPConstruct):
     def build(self, pb):
         pb.prob += lpSum(
             [check_nan(pb.data.Cost[k]) * pb.ingredient_vars[k]
@@ -27,7 +27,7 @@ class ObjectivePulpConstruct(PulpConstruct):
         )
 
 
-class SubjectivePulpConstruct(PulpConstruct):
+class SubjectivePPConstruct(PPConstruct):
     def build(self, pb):
         pb.prob += lpSum([pb.ingredient_vars[k] for k in pb.data.Ingredients]) == 100
         for Element in pb.data.Ingredients_list:
@@ -42,7 +42,7 @@ class SubjectivePulpConstruct(PulpConstruct):
                                   for k in pb.data.Ingredients]) <= Element["up"] * (100 - pb.h_2_0)
 
 
-class VarPulpConstruct(PulpConstruct):
+class VarPPConstruct(PPConstruct):
     def build(self, pb):
         for k in pb.data.Ingredients:
             if not math.isnan(pb.data.UP[k]):
@@ -51,7 +51,7 @@ class VarPulpConstruct(PulpConstruct):
                 pb.prob += pb.ingredient_vars[k] >= pb.data.Down[k]
 
 
-class VarGroupPulpConstruct(PulpConstruct):
+class VarGroupPPConstruct(PPConstruct):
     def build(self, pb):
         for g in pb.data.Group.values():
             up = pb.data.Group_up[g[0]]
@@ -62,7 +62,7 @@ class VarGroupPulpConstruct(PulpConstruct):
                 pb.prob += lpSum(pb.ingredient_vars[element] for element in g) >= down
 
 
-class FeObjectivePulpConstruct(PulpConstruct):
+class FeObjectivePPConstruct(PPConstruct):
     def build(self, pb):
         fe = pb.data.Ingredients_list[0]
         pb.prob += lpSum([pb.ingredient_vars[k] * check_nan(fe[k])
@@ -70,7 +70,7 @@ class FeObjectivePulpConstruct(PulpConstruct):
                           for k in pb.data.Ingredients]) - (100 - pb.h_2_0)
 
 
-class SiObjectivePulpConstruct(PulpConstruct):
+class SiObjectivePPConstruct(PPConstruct):
     def build(self, pb):
         fe = pb.data.Ingredients_list[1]
         pb.prob += lpSum([pb.ingredient_vars[k] * check_nan(fe[k])

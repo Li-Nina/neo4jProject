@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import json
 import math
+import time
 
 
 def check_nan(num):
@@ -38,3 +40,26 @@ def _float_scalar(num):
         n += 1
     formats = '%0.' + str(n) + 'f'
     return float(formats % (0.1 ** n))
+
+
+# noinspection PyProtectedMember
+def convert_namedtuple(nt, types='dict'):
+    """
+    将namedtuple转换为dict或json string
+    @see https://stackoverflow.com/questions/26180528/python-named-tuple-to-dictionary
+    @see https://gist.github.com/Integralist/b25185f91ebc8a56fe070d499111b447
+    :param nt: namedtuple
+    :param types: 转换类型，'dict','json','str'
+    :return:
+    """
+    order_dic = nt._asdict()
+    if types == 'dict':
+        return dict(order_dic)
+    elif types == 'json' or types == 'str':
+        return json.dumps(order_dic)
+    else:
+        return order_dic
+
+
+def current_time_millis():
+    return int(round(time.time() * 1000))

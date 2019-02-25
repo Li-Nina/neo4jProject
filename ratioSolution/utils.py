@@ -5,11 +5,11 @@ import math
 
 import numpy as np
 
-from gekkoSolution.customException import NotFoundError, NumberError
-from utils.const import GEKKO_LOG_NAME
+from ratioSolution.customException import NotFoundError, NumberError
+from serverWeb.config import APP_LOG_NAME
 from utils.utils import check_nan
 
-logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
+logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
 def cal_weights(pb, **kw):

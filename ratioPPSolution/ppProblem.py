@@ -3,16 +3,17 @@
 from collections import namedtuple
 
 from pulp import *
-from pulpSolution.pulpConstruct import ObjectivePulpConstruct, SubjectivePulpConstruct, VarPulpConstruct, \
-    VarGroupPulpConstruct
-from utils.const import PULP_LOG_NAME
+
+from ratioPPSolution.ppConstruct import ObjectivePPConstruct, SubjectivePPConstruct, VarPPConstruct, \
+    VarGroupPPConstruct
+from serverWeb.config import APP_LOG_NAME
 from utils.excelParse import ExcelParse
 from utils.utils import check_nan
 
-logger = logging.getLogger(PULP_LOG_NAME + "." + __name__)
+logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
-class PulpProblem:
+class PPProblem:
 
     def __init__(self, excel_file="../data/template.xlsx", exclude=None, name="The Optimization Problem"):
         self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
@@ -25,10 +26,10 @@ class PulpProblem:
         self._init_constructs()
 
     def _init_constructs(self):
-        self._constructs["objective"] = ObjectivePulpConstruct()
-        self._constructs["subjective"] = SubjectivePulpConstruct()
-        self._constructs["var"] = VarPulpConstruct()
-        self._constructs["var_group"] = VarGroupPulpConstruct()
+        self._constructs["objective"] = ObjectivePPConstruct()
+        self._constructs["subjective"] = SubjectivePPConstruct()
+        self._constructs["var"] = VarPPConstruct()
+        self._constructs["var_group"] = VarGroupPPConstruct()
 
     def build(self):
         for i in ["objective", "subjective", "var", "var_group", "custom"]:

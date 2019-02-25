@@ -5,13 +5,13 @@ from collections import namedtuple
 
 from gekko import GEKKO
 
-from gekkoSolution.gekkoConstruct import PriceObjectiveConstruct, SubjectiveConstruct, VarConstruct, \
+from ratioSolution.construct import PriceObjectiveConstruct, SubjectiveConstruct, VarConstruct, \
     VarGroupConstruct, ObjectiveConstructBuilder
-from utils.const import GEKKO_LOG_NAME
+from serverWeb.config import APP_LOG_NAME
 from utils.excelParse import ExcelParse
 from utils.utils import check_nan
 
-logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
+logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 '''
     最大支持114个变量（项目）,100+个元素，执行时间约为28s
@@ -19,7 +19,7 @@ logger = logging.getLogger(GEKKO_LOG_NAME + "." + __name__)
 '''
 
 
-class GekkoProblem:
+class Problem:
 
     def __init__(self, excel_file="../data/template.xlsx", exclude=None):
         self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
