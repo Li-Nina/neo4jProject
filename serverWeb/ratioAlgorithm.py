@@ -5,13 +5,15 @@ import logging
 import time
 import traceback
 from collections import namedtuple
+
+import pandas as pd
 from flask import jsonify, request, Blueprint
 
 from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct
 from ratioSolution.problem import Problem
 from ratioSolution.utils import cal_weights
 from serverWeb.config import APP_LOG_NAME
-from utils.utils import number_scalar, convert_namedtuple, current_time_millis
+from utils.utils import number_scalar, convert_namedtuple, current_time_millis, allowed_file
 
 MODEL_DICT = {}
 ResponseJson = namedtuple("ResponseJson", ['status', 'msg', 'result', 'stamp'])
@@ -28,6 +30,26 @@ def index():
 @mod.route('/<database>')
 def hello_world(database):
     log(database)
+    return 'nlp classification server database {}.........'.format(database)
+
+
+@mod.route('/hello_world_file/<database>')
+def hello_world_file(database):
+    log(database)
+    try:
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            _sheet = pd.read_excel(file)
+            print(_sheet)
+
+    except Exception as e:
+        return jsonify(convert_namedtuple(ResponseJson(status=1,
+                                                       msg='OK,using model {}'.format('sss'),
+                                                       result=str(e),
+                                                       stamp=current_time_millis()
+                                                       )))
+
+
     return 'nlp classification server database {}.........'.format(database)
 
 

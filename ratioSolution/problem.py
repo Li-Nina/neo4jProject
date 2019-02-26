@@ -14,8 +14,7 @@ from utils.utils import check_nan
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 '''
-    最大支持114个变量（项目）,100+个元素，执行时间约为28s
-    一般执行0.6s
+    最大支持114个变量（项目）,100+个元素
 '''
 
 

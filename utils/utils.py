@@ -4,6 +4,8 @@ import json
 import math
 import time
 
+from serverWeb.config import ALLOWED_EXTENSIONS
+
 
 def check_nan(num):
     return 0 if math.isnan(num) else num
@@ -63,3 +65,7 @@ def convert_namedtuple(nt, types='dict'):
 
 def current_time_millis():
     return int(round(time.time() * 1000))
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS

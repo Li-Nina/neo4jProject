@@ -21,5 +21,5 @@ from flask import Flask
 
 app = Flask(__name__)
 config_loggers(app)
-
+app.config['MAX_CONTENT_LENGTH'] = 6 * 1024 * 1024  # 限制上传excel模板最大为6MB
 app.register_blueprint(ratioAlgorithm.mod, url_prefix='/algo/ratioAlgorithm')
