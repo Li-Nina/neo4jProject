@@ -4,7 +4,7 @@ import logging
 import math
 
 from ratioSolution.customException import NotFoundError
-from ratioSolution.utils import cal_weights
+from ratioSolution.util import cal_weights
 from serverWeb.config import APP_LOG_NAME
 from utils.utils import check_nan
 
