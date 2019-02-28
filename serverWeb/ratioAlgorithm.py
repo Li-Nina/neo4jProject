@@ -6,8 +6,8 @@ import traceback
 from collections import namedtuple
 
 from flask import jsonify, request, Blueprint
-from serverWeb.config import APP_LOG_NAME
-from utils.utils import convert_namedtuple, current_time_millis, allowed_file
+from utils.config import APP_LOG_NAME
+from utils.util import convert_namedtuple, current_time_millis, allowed_file
 
 MODEL_DICT = {}
 ResponseJson = namedtuple("ResponseJson", ['status', 'msg', 'result', 'stamp'])

@@ -4,7 +4,7 @@ import json
 import math
 import time
 
-from serverWeb.config import ALLOWED_EXTENSIONS
+from utils.config import ALLOWED_EXTENSIONS
 
 
 def check_nan(num):
@@ -15,12 +15,26 @@ def check_nan_or_zero(num):
     return math.isnan(num) or num == 0
 
 
-'''
-    计算一个数的量级，eg：150 --> 100, 0.0551 --> 0.01
-'''
+def number_scalar_modified(num):
+    """
+    计算一个数的量级，正数始终返回1，eg：150 --> 1, 0.0551 --> 0.01
+    :param num:
+    :return:
+    """
+    num = abs(num)
+    if num >= 1:
+        digits = 1
+    else:
+        digits = _float_scalar(num)
+    return digits
 
 
 def number_scalar(num):
+    """
+    计算一个数的量级，eg：150 --> 100, 0.0551 --> 0.01
+    :param num:
+    :return:
+    """
     num = abs(num)
     if num >= 1:
         digits = 10 ** int(math.log10(num))
@@ -29,12 +43,12 @@ def number_scalar(num):
     return digits
 
 
-'''
-    计算小数的量级，eg：0.0551 --> 0.01
-'''
-
-
 def _float_scalar(num):
+    """
+    计算小数的量级，eg：0.0551 --> 0.01
+    :param num:
+    :return:
+    """
     num = abs(num)
     n = 0
     while 1 > num > 0:

@@ -4,7 +4,7 @@ import math
 
 from pulp import lpSum
 
-from utils.utils import check_nan
+from utils.util import check_nan
 
 
 class PPConstruct:

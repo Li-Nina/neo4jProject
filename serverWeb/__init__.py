@@ -6,7 +6,7 @@ import logging
 from flask.logging import default_handler
 
 from serverWeb import ratioAlgorithm
-from serverWeb.config import LOG_PATH
+from utils.config import LOG_PATH
 from serverWeb.logger import MyHandler
 
 

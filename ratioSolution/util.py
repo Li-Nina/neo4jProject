@@ -6,8 +6,8 @@ import math
 import numpy as np
 
 from ratioSolution.customException import NotFoundError, NumberError
-from serverWeb.config import APP_LOG_NAME
-from utils.utils import check_nan
+from utils.config import APP_LOG_NAME
+from utils.util import check_nan
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 

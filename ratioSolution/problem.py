@@ -5,11 +5,11 @@ from collections import namedtuple
 
 from gekko import GEKKO
 
-from ratioSolution.construct import PriceObjectiveConstruct, SubjectiveConstruct, VarConstruct, \
-    VarGroupConstruct, ObjectiveConstructBuilder
-from serverWeb.config import APP_LOG_NAME
+from ratioSolution.construct import SubjectiveConstruct, VarConstruct, \
+    VarGroupConstruct
+from utils.config import APP_LOG_NAME
 from utils.excelParse import ExcelParse
-from utils.utils import check_nan
+from utils.util import check_nan
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
@@ -31,7 +31,7 @@ class Problem:
         self._init_constructs()
 
     def _init_constructs(self):
-        self._constructs["objective"] = ObjectiveConstructBuilder(self, (PriceObjectiveConstruct(self), 1))
+        # 目标函数self._constructs["objective"]在api处生成
         self._constructs["subjective"] = SubjectiveConstruct(self)
         self._constructs["var"] = VarConstruct(self)
         self._constructs["var_group"] = VarGroupConstruct(self)
@@ -75,6 +75,15 @@ class Problem:
 
     def get_objfcnval(self):
         return self.prob.options.objfcnval
+
+    def get_result(self):
+        """
+        result:配比结果list 如[1,2,3,4,5]
+        names:配比物料名称list 如[巴西粗粉,高品澳粉,高返,过筛镍矿]
+        """
+        result = [self.ingredient_vars[k].value[0] for k in self.data.Ingredients]
+        names = [self.data.Ingredients_names["var_" + k] for k in self.data.Ingredients]
+        return result, names
 
     def write_to_excel(self, excel_file=None):
         # 配比计算成分 成本计算

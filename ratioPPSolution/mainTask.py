@@ -5,7 +5,7 @@ import traceback
 
 # lp = MinPriceProblem("../data/template.xlsx")
 from ratioPPSolution.ppProblem import PPProblem
-from serverWeb.config import APP_LOG_NAME
+from utils.config import APP_LOG_NAME
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
