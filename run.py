@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# todo 1,接口问题
-# todo 2,综合排序参数问题
+# todo 1,接口问题，优化excelParse部分，不要每次重新读
+# todo 2,增加自定义排序接口
 # todo 3,源码保护问题
 from serverWeb import app
 
