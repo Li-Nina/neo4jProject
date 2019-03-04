@@ -14,7 +14,7 @@ try:
     start = time.time()
 
     lp = Problem()
-    weights = cal_weights(lp, **{'TFe': 1, 'SiO2': 1, 'COST': 1, 'R': 1, 'SS': 1})
+    weights = cal_weights(lp.data, **{'TFe': 1, 'SiO2': 1, 'COST': 1, 'R': 1, 'SS': 1})
     # weights = cal_weights(lp, **{'COST': 1000, 'R': 1})
     # weights = cal_weights(lp, **{'R': 1})
     # weights = cal_weights(lp, **{'COST': 1})

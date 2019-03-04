@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import json
 import logging
+import time
 
 from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct, PriceObjectiveConstruct, \
     RObjectiveConstruct, SSObjectiveConstruct
@@ -9,6 +10,7 @@ from ratioSolution.customException import NotFoundError
 from ratioSolution.problem import Problem
 from ratioSolution.util import cal_weights
 from utils.config import APP_LOG_NAME
+from utils.excelParse import ExcelParse
 from utils.util import number_scalar_modified
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
@@ -83,16 +85,16 @@ def ratio_algorithm(template, iters=5, steps=None):
     if steps is None:
         steps = [0.1, 0.01, 0.001, 0.0001]
 
-    lp = Problem(excel_file=template)
-    goal_fcn = _goal_fcn_list(lp)
+    excel_data = ExcelParse(excel_file=template)
+    goal_fcn = _goal_fcn_list(excel_data)
     # [ {Tfe:1}, {Al2O3:1} , {Tfe:1, Al2O3:1} ]
-    weights_list = _weights_list_cal(lp, goal_fcn)
+    weights_list = _weights_list_cal(excel_data, goal_fcn)
     result_list = []
     for weight in weights_list:
         _sub_rst = {'type': 0 if len(weight) == 1 else 1, 'obj': list(weight.keys()), 'weight': list(weight.values())}
         _data = []
         for step in steps:
-            lp = Problem(excel_file=template)
+            lp = Problem(excel_data=excel_data, excel_type='data')
             objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
             lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
             lp.build()
@@ -128,12 +130,12 @@ def ratio_algorithm(template, iters=5, steps=None):
     return json.dumps(result_list, ensure_ascii=False)
 
 
-def _goal_fcn_list(lp):
+def _goal_fcn_list(excel_data):
     _goal_list = ['COST', 'SS']
-    tfe_index = lp.data.Ingredients_list_name_index.get('TFe'.lower())
-    al2o3_index = lp.data.Ingredients_list_name_index.get('Al2O3'.lower())
-    cao_index = lp.data.Ingredients_list_name_index.get('CaO'.lower())
-    sio2_index = lp.data.Ingredients_list_name_index.get('SiO2'.lower())
+    tfe_index = excel_data.Ingredients_list_name_index.get('TFe'.lower())
+    al2o3_index = excel_data.Ingredients_list_name_index.get('Al2O3'.lower())
+    cao_index = excel_data.Ingredients_list_name_index.get('CaO'.lower())
+    sio2_index = excel_data.Ingredients_list_name_index.get('SiO2'.lower())
     if tfe_index is not None:
         _goal_list.append('TFe')
     if al2o3_index is not None:
@@ -146,7 +148,7 @@ def _goal_fcn_list(lp):
 
 
 def _objectives_list(lp, weights):
-    print(weights)
+    print(weights)  # todo
     name_list = list(weights.keys())
     _rst = []
     for name in name_list:
@@ -167,17 +169,20 @@ def _objectives_list(lp, weights):
     return _rst
 
 
-def _weights_list_cal(lp, goal_list):
+def _weights_list_cal(excel_data, goal_list):
     weights_list = []
     total_dic = {}
     for i in goal_list:
         weights_list.append({i.lower(): 1})
         total_dic[i.lower()] = 1
-    weights_list.append(cal_weights(lp, **total_dic))
+    weights_list.append(cal_weights(excel_data, **total_dic))
     return weights_list
 
 
 if __name__ == '__main__':
+    a = time.time()
     s = ratio_algorithm("../data/template.xlsx")
+    b = time.time()
     print(s)
     print(len(s))
+    print('time: ', b - a)

@@ -20,8 +20,20 @@ logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 class Problem:
 
-    def __init__(self, excel_file="../data/template.xlsx", exclude=None):
-        self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
+    def __init__(self, excel_file="../data/template.xlsx", excel_data=None, excel_type='file', exclude=None):
+        """
+        初始化Problem，构建数据data。有两种方式，1、通过传入excel文件路径或文件内容；2、直接传入构建好的excel data
+        :param excel_file: 构建data的第一种方式，excel文件路径或文件内容
+        :param excel_data: 构建data的第二种方式，通过ExcelParse构建好的excel data
+        :param excel_type: 指定使用哪种data构建方式，file或data
+        :param exclude: 第一种方式构建data时，excel文件要略去的列
+        """
+        if excel_type == 'file':
+            self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
+        elif excel_type == 'data':
+            self.data = excel_data
+        else:
+            raise ValueError("Invalid excel_type. Expected one of: %s" % ['file', 'data'])
         self.prob = GEKKO(remote=False)  # Initialize gekko
         self.prob.options.SOLVER = 1  # APOPT is an MINLP solver
         # 构建变量字典

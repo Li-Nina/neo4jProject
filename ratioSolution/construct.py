@@ -118,7 +118,7 @@ class RObjectiveConstruct(Construct):
             IngredientObjectiveConstruct(optimization_problem, 'CaO', maximum=True).get_obj())
         sio2 = self.pb.prob.Intermediate(
             IngredientObjectiveConstruct(optimization_problem, 'SiO2', maximum=False).get_obj())
-        weight = cal_weights(optimization_problem, CaO=1, SiO2=1)
+        weight = cal_weights(optimization_problem.data, CaO=1, SiO2=1)
         self._obj = cao * weight['cao'] + sio2 * weight['sio2']
 
     def get_obj(self):

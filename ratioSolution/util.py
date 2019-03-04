@@ -12,9 +12,9 @@ from utils.util import check_nan
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
-def cal_weights(pb, **kw):
+def cal_weights(excel_data, **kw):
     """
-    :param pb:optimization_problem
+    :param excel_data:excel_data
     :param kw:每个目标的权重，其中价格的key为cost
               eg: tfe=1, sio2=3, cost=1
               eg: **{'tfe': 1, 'sio2': 3, 'cost': 1}
@@ -24,16 +24,16 @@ def cal_weights(pb, **kw):
     unused = ['up', 'down']
     for key, value in kw.items():
         if key.lower() == 'cost':
-            cost_list = [check_nan(v) for k, v in pb.data.Cost.items() if k not in unused]
+            cost_list = [check_nan(v) for k, v in excel_data.Cost.items() if k not in unused]
             scalar = sum(cost_list) / len(cost_list)
         elif key.lower() == 'ss':
-            scalar = _cal_scalar(pb.data.SS, unused)
+            scalar = _cal_scalar(excel_data.SS, unused)
         elif key.lower() == 'r':
-            scalar = _cal_scalar_r(pb, unused)
+            scalar = _cal_scalar_r(excel_data, unused)
         else:
-            index = pb.data.Ingredients_list_name_index.get(key.lower())
+            index = excel_data.Ingredients_list_name_index.get(key.lower())
             if index is not None:
-                scalar = _cal_scalar(pb.data.Ingredients_list[index], unused)
+                scalar = _cal_scalar(excel_data.Ingredients_list[index], unused)
             else:
                 logger.error('ingredients ' + key.lower() + ' not found!')
                 raise NotFoundError('ingredients ' + key.lower() + ' not found!')
@@ -65,13 +65,13 @@ def _cal_scalar(ing_dic, unused):
     return scalar
 
 
-def _cal_scalar_r(pb, unused):
-    cao_index = pb.data.Ingredients_list_name_index.get('CaO'.lower())
-    sio2_index = pb.data.Ingredients_list_name_index.get('SiO2'.lower())
+def _cal_scalar_r(excel_data, unused):
+    cao_index = excel_data.Ingredients_list_name_index.get('CaO'.lower())
+    sio2_index = excel_data.Ingredients_list_name_index.get('SiO2'.lower())
     if cao_index is not None and sio2_index is not None:
         logger.info('_cal_scalar_r finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
-        cao_dic = pb.data.Ingredients_list[cao_index]
-        sio2_dic = pb.data.Ingredients_list[sio2_index]
+        cao_dic = excel_data.Ingredients_list[cao_index]
+        sio2_dic = excel_data.Ingredients_list[sio2_index]
         scalar = _cal_scalar(cao_dic, unused) / _cal_scalar(sio2_dic, unused)
         if math.isfinite(scalar):
             return scalar
