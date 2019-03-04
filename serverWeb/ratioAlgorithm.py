@@ -29,12 +29,28 @@ def hello_world(database):
 
 @mod.route('/hello_world_file/<database>')
 def hello_world_file(database):
-    log(database)
+    """
+    @see https://zhuanlan.zhihu.com/p/23731819?refer=flask
+    需要2个参数：
+    1、(必有)file文件，excel模板，表单name=file
+    2、(可选)POST传参，参数名data，格式json，json包含3个key
+    {"top_n": 2, "steps": [0.1, 0.01], "custom_weights_list": [{"tfe": 1}, {"al2o3": 1}, {"tfe": 1, "Al2O3": 1}]}
+
+    :param database:
+    :return:
+    """
     try:
         file = request.files['file']
         if file and allowed_file(file.filename):
-            step = 0.001  # 循环计算步长
-            iters = 5  # 循环次数
+            data = request.args.get('data')
+            if data:
+                data_json = json.loads(data)
+
+                data = '{"top_n": 2, "steps": [0.1, 0.01], "custom_weights_list": [{"tfe": 1}, {"al2o3": 1}, {"tfe": 1, "Al2O3": 1}]}'
+                data_json = json.loads(data)
+
+
+
     except Exception as e:
         print(repr(e))
         logger.error(traceback.format_exc())
