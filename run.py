@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# todo 2,增加自定义排序接口
 # todo 3,粒度限制加入
 # todo 4,源码保护问题
 from serverWeb import app

@@ -16,11 +16,12 @@ from utils.util import number_scalar_modified
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
-def ratio_algorithm(template, iters=5, steps=None):
+def ratio_algorithm(excel_template, top_n=5, steps=None, custom_weights_list=None):
     """
-    :param template: excel模板文件或路径
-    :param iters: 循环次数
-    :param steps: 循环计算步长
+    :param excel_template: excel模板文件或路径
+    :param top_n: 每个步长给出前topN 结果
+    :param steps: topN的计算步长
+    :param custom_weights_list: 要计算的目标和权重,eg. [{Tfe:1},{Al2O3:1},{Tfe:1,Al2O3:1}] .默认计算所有目标和全部目标组合的1:1权重
     :return:result_list json格式
         [{
             "type": 0,                          # type=0单目标函数(单个最优)，type=1多目标函数，默认全部(综合排序)
@@ -85,10 +86,17 @@ def ratio_algorithm(template, iters=5, steps=None):
     if steps is None:
         steps = [0.1, 0.01, 0.001, 0.0001]
 
-    excel_data = ExcelParse(excel_file=template)
+    excel_data = ExcelParse(excel_file=excel_template)
+    # 可以计算的目标小写名称 ['cost', 'ss', 'tfe', 'al2o3', 'sio2', 'r']
     goal_fcn = _goal_fcn_list(excel_data)
-    # [ {Tfe:1}, {Al2O3:1} , {Tfe:1, Al2O3:1} ]
-    weights_list = _weights_list_cal(excel_data, goal_fcn)
+    if custom_weights_list:
+        # 根据custom_weights_list计算需要的目标和权重 [ {tfe:1}, {al2o3:1} , {tfe:1, al2o3:1} ]
+        weights_list = _custom_weights_list_cal(custom_weights_list, excel_data, goal_fcn)
+    else:
+        # 默认计算的所有目标和权重 [ {tfe:1}, {al2o3:1} , {tfe:1, al2o3:1} ]
+        weights_list = _default_weights_list_cal(excel_data, goal_fcn)
+    print("----->", weights_list)  # todo
+
     result_list = []
     for weight in weights_list:
         _sub_rst = {'type': 0 if len(weight) == 1 else 1, 'obj': list(weight.keys()), 'weight': list(weight.values())}
@@ -106,7 +114,7 @@ def ratio_algorithm(template, iters=5, steps=None):
             _sub_data = {'step': step}
             _rst_list = []
             _name = None
-            for i in range(iters):
+            for i in range(top_n):
                 if objfcnval is not None:  # 防止objfcnval为0，不写if objfcnval
                     obj_scalar = number_scalar_modified(objfcnval)
                     lp.prob.Equation(objfcn >= objfcnval + step * obj_scalar)
@@ -131,19 +139,22 @@ def ratio_algorithm(template, iters=5, steps=None):
 
 
 def _goal_fcn_list(excel_data):
-    _goal_list = ['COST', 'SS']
+    """
+    :return: 可以计算的目标名称，需小写,其中必包含cost和ss，最长为['cost', 'ss', 'tfe', 'al2o3', 'sio2', 'r']
+    """
+    _goal_list = ['cost', 'ss']
     tfe_index = excel_data.Ingredients_list_name_index.get('TFe'.lower())
     al2o3_index = excel_data.Ingredients_list_name_index.get('Al2O3'.lower())
     cao_index = excel_data.Ingredients_list_name_index.get('CaO'.lower())
     sio2_index = excel_data.Ingredients_list_name_index.get('SiO2'.lower())
     if tfe_index is not None:
-        _goal_list.append('TFe')
+        _goal_list.append('tfe')
     if al2o3_index is not None:
-        _goal_list.append('Al2O3')
+        _goal_list.append('al2o3')
     if sio2_index is not None:
-        _goal_list.append('SiO2')
+        _goal_list.append('sio2')
     if cao_index is not None and sio2_index is not None:
-        _goal_list.append('R')
+        _goal_list.append('r')
     return _goal_list
 
 
@@ -169,19 +180,36 @@ def _objectives_list(lp, weights):
     return _rst
 
 
-def _weights_list_cal(excel_data, goal_list):
+def _default_weights_list_cal(excel_data, goal_list):
     weights_list = []
     total_dic = {}
     for i in goal_list:
-        weights_list.append({i.lower(): 1})
-        total_dic[i.lower()] = 1
+        weights_list.append({i: 1})
+        total_dic[i] = 1
     weights_list.append(cal_weights(excel_data, **total_dic))
+    return weights_list
+
+
+def _custom_weights_list_cal(custom_weights_list, excel_data, goal_fcn):
+    weights_list = []
+    for custom_weight in custom_weights_list:
+        if all(_.lower() in goal_fcn for _ in custom_weight.keys()):
+            if len(custom_weight) == 1:
+                weights_list.append({k.lower(): 1 for k, v in custom_weight.items()})
+            else:
+                weights_list.append(cal_weights(excel_data, **custom_weight))
+        else:
+            raise ValueError('custom_weights_list is incorrect!')
     return weights_list
 
 
 if __name__ == '__main__':
     a = time.time()
-    s = ratio_algorithm("../data/template.xlsx")
+    s = ratio_algorithm("../data/template.xlsx",
+                        top_n=1,
+                        steps=[1],
+                        # custom_weights_list=[{'cost': 1}, {'Tfe': 1, 'Al2O3': 1}]
+                        )
     b = time.time()
     print(s)
     print(len(s))
