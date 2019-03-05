@@ -46,10 +46,10 @@ def ratio_algorithm_api():
                                                            msg='ok',
                                                            result=rst_json
                                                            )))
-    except Exception as e:
+    except Exception:
         logger.error(traceback.format_exc())
         return jsonify(convert_namedtuple(ResponseJson(status=1,
-                                                       msg=str(e),
+                                                       msg='ERROR! please check the parameters',
                                                        result={}
                                                        )))
 

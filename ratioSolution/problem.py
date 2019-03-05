@@ -93,9 +93,7 @@ class Problem:
         result:配比结果list 如[1,2,3,4,5]
         names:配比物料名称list 如[巴西粗粉,高品澳粉,高返,过筛镍矿]
         """
-        result = [self.ingredient_vars[k].value[0] for k in self.data.Ingredients]
-        names = [self.data.Ingredients_names["var_" + k] for k in self.data.Ingredients]
-        return result, names
+        return [self.ingredient_vars[k].value[0] for k in self.data.Ingredients]
 
     def write_to_excel(self, excel_file=None):
         # 配比计算成分 成本计算

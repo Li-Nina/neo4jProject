@@ -24,62 +24,58 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
     :param custom_weights_list: 要计算的目标和权重,eg. [{Tfe:1},{Al2O3:1},{Tfe:1,Al2O3:1}] .默认计算所有目标和全部目标组合的1:1权重
     :return:result_list json格式
         [{
-            "type": 0,                          # type=0单目标函数(单个最优)，type=1多目标函数，默认全部(综合排序)
-            "obj": ["tfe"],                     # obj list, 优化目标对象
-            "weight": [1],                      # weight list, 优化目标对象间比例
-            "data": [{                          # data jsonList<json>, 计算结果
-                "step": 0.1,                    # step 结果步长
-                "result": [                     # result list<list>, 该step下的多个比例结果
+            "type": 0,                              # type=0单目标函数(单个最优)，type=1多目标函数，默认全部(综合排序)
+            "obj": ["tfe"],                         # obj list, 优化目标对象
+            "weight": [1],                          # weight list, 优化目标对象间比例
+            "name": ["巴西粗粉", "高品澳粉", "高返"],   # name 比例对应的原料名称
+            "data": [{                              # data jsonList<json>, 计算结果
+                "step": 0.1,                        # step 结果步长
+                "result": [                         # result list<list>, 该step下的多个比例结果
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]  # name 比例对应的原料名称
+                ]
             }, {
                 "step": 0.01,
                 "result": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]
+                ]
             }, {
                 "step": 0.001,
                 "result": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]
+                ]
             }]
         }, {
             "type": 1,
             "obj": ["tfe", "al2o3", "ss"],
             "weight": [1, 1, 1],
+            "name": ["巴西粗粉", "高品澳粉", "高返"],
             "data": [{
                 "step": 0.1,
                 "result": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]
+                ]
             }, {
                 "step": 0.01,
                 "result": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]
+                ]
             }, {
                 "step": 0.001,
                 "result": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
-                ],
-                "name": ["铁粉", "高反", "澳粉"]
+                ]
             }]
         }]
     """
@@ -101,7 +97,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
 
     result_list = []
     for weight in weights_list:
-        _sub_rst = {'type': 0 if len(weight) == 1 else 1, 'obj': list(weight.keys()), 'weight': list(weight.values())}
+        _sub_rst = {'type': 0 if len(weight) == 1 else 1,
+                    'obj': list(weight.keys()),
+                    'weight': list(weight.values()),
+                    'name': [excel_data.Ingredients_names["var_" + k] for k in excel_data.Ingredients]
+                    }
         _data = []
         for step in steps:
             lp = Problem(excel_data=excel_data, excel_type='data')
@@ -115,7 +115,6 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
 
             _sub_data = {'step': step}
             _rst_list = []
-            _name = None
             for i in range(top_n):
                 if objfcnval is not None:  # 防止objfcnval为0，不写if objfcnval
                     obj_scalar = number_scalar_modified(objfcnval)
@@ -127,12 +126,9 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     # 没有最优解，跳出循环
                     break
                 objfcnval = lp.get_objfcnval()
-                _result, _name = lp.get_result()
-
-                _rst_list.append(_result)
+                _rst_list.append(lp.get_result())
 
             _sub_data['result'] = _rst_list
-            _sub_data['name'] = _name
             _data.append(_sub_data)
         _sub_rst['data'] = _data
         result_list.append(_sub_rst)
