@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# todo
 APP_LOG_NAME = 'flask.app'
-LOG_PATH = "C:/Users/sun/PycharmProjects/optimizationproblem/log/ratioServer.log"
-# LOG_PATH = "./log/ratioServer.log"
+LOG_PATH = "./log/ratioServer.log"
 ALLOWED_EXTENSIONS = {'xlsx', 'xls', 'xlsm', 'xltx', 'xltm', 'xlt', 'xml', 'xlam', 'xla', 'xlw', 'xlr'}

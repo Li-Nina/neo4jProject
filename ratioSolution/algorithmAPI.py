@@ -16,7 +16,7 @@ from utils.util import number_scalar_modified
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
-def ratio_algorithm(excel_template, top_n=5, steps=None, custom_weights_list=None):
+def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=None):
     """
     :param excel_template: excel模板文件或路径
     :param top_n: 每个步长给出前topN 结果
@@ -83,6 +83,8 @@ def ratio_algorithm(excel_template, top_n=5, steps=None, custom_weights_list=Non
             }]
         }]
     """
+    if top_n is None:
+        top_n = 5
     if steps is None:
         steps = [0.1, 0.01, 0.001, 0.0001]
 
