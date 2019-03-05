@@ -72,7 +72,7 @@ def convert_namedtuple(nt, types='dict'):
     if types == 'dict':
         return dict(order_dic)
     elif types == 'json' or types == 'str':
-        return json.dumps(order_dic)
+        return json.dumps(order_dic, ensure_ascii=False)
     else:
         return order_dic
 

@@ -22,7 +22,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
     :param top_n: 每个步长给出前topN 结果
     :param steps: topN的计算步长
     :param custom_weights_list: 要计算的目标和权重,eg. [{Tfe:1},{Al2O3:1},{Tfe:1,Al2O3:1}] .默认计算所有目标和全部目标组合的1:1权重
-    :return:result_list json格式
+    :return:result_list list格式
         [{
             "type": 0,                              # type=0单目标函数(单个最优)，type=1多目标函数，默认全部(综合排序)
             "obj": ["tfe"],                         # obj list, 优化目标对象
@@ -132,8 +132,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
             _data.append(_sub_data)
         _sub_rst['data'] = _data
         result_list.append(_sub_rst)
-
-    return json.dumps(result_list, ensure_ascii=False)
+    return result_list
 
 
 def _goal_fcn_list(excel_data):
@@ -199,16 +198,3 @@ def _custom_weights_list_cal(custom_weights_list, excel_data, goal_fcn):
         else:
             raise ValueError('custom_weights_list is incorrect!')
     return weights_list
-
-
-if __name__ == '__main__':
-    a = time.time()
-    s = ratio_algorithm("../data/template.xlsx",
-                        top_n=1,
-                        steps=[1],
-                        # custom_weights_list=[{'cost': 1}, {'Tfe': 1, 'Al2O3': 1}]
-                        )
-    b = time.time()
-    print(s)
-    print(len(s))
-    print('time: ', b - a)

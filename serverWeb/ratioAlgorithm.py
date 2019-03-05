@@ -41,10 +41,10 @@ def ratio_algorithm_api():
             steps = data_dict['steps'] if 'steps' in data_dict else None
             custom_weights_list = data_dict['custom_weights_list'] if 'custom_weights_list' in data_dict else None
 
-            rst_json = ratio_algorithm(file, top_n=top_n, steps=steps, custom_weights_list=custom_weights_list)
+            rst_list = ratio_algorithm(file, top_n=top_n, steps=steps, custom_weights_list=custom_weights_list)
             return jsonify(convert_namedtuple(ResponseJson(status=0,
                                                            msg='ok',
-                                                           result=rst_json
+                                                           result=rst_list
                                                            )))
     except Exception:
         logger.error(traceback.format_exc())
