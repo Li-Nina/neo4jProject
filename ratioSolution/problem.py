@@ -36,7 +36,7 @@ class Problem:
             raise ValueError("Invalid excel_type. Expected one of: %s" % ['file', 'data'])
         self.prob = GEKKO(remote=False)  # Initialize gekko
         self.prob.options.SOLVER = 1  # APOPT is an MINLP solver
-        # 构建变量字典
+        # 构建变量字典 {'x1': GKVariable, 'x2': GKVariable, 'x3': GKVariable, ... , 'x9': GKVariable}
         self.ingredient_vars = {i: self.prob.Var(value=0, lb=0, ub=100) for i in self.data.Ingredients}
         self.h_2_0 = sum(self.ingredient_vars[k] * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
         self._constructs = {}
