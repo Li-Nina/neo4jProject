@@ -16,12 +16,13 @@ from utils.util import number_scalar_modified
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 
-def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=None):
+def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=None, ctrl_constructs_dict=None):
     """
     :param excel_template: excel模板文件或路径
     :param top_n: 每个步长给出前topN 结果
     :param steps: topN的计算步长
     :param custom_weights_list: 要计算的目标和权重,eg. [{Tfe:1},{Al2O3:1},{Tfe:1,Al2O3:1}] .默认计算所有目标和全部目标组合的1:1权重
+    :param ctrl_constructs_dict: dict {'subjective_grain_size':1, 'var_group':0} 用于控制是否有粘附比限制和配料分组要求
     :return:result_list list格式
         [{
             "type": 0,                              # type=0单目标函数(单个最优)，type=1多目标函数，默认全部(综合排序)
@@ -104,7 +105,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     }
         _data = []
         for step in steps:
-            lp = Problem(excel_data=excel_data, excel_type='data')
+            lp = Problem(excel_data=excel_data, excel_type='data', ctrl_constructs_dict=ctrl_constructs_dict)
             objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
             lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
             lp.build()

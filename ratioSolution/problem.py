@@ -6,7 +6,7 @@ from collections import namedtuple
 from gekko import GEKKO
 
 from ratioSolution.construct import SubjectiveConstruct, VarConstruct, \
-    VarGroupConstruct
+    VarGroupConstruct, SubjectiveGrainSizeConstruct
 from utils.config import APP_LOG_NAME
 from utils.excelParse import ExcelParse
 from utils.util import check_nan
@@ -20,13 +20,15 @@ logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
 class Problem:
 
-    def __init__(self, excel_file="../data/template.xlsx", excel_data=None, excel_type='file', exclude=None):
+    def __init__(self, excel_file="../data/template.xlsx", excel_data=None, excel_type='file', exclude=None,
+                 ctrl_constructs_dict=None):
         """
         初始化Problem，构建数据data。有两种方式，1、通过传入excel文件路径或文件内容；2、直接传入构建好的excel data
         :param excel_file: 构建data的第一种方式，excel文件路径或文件内容
         :param excel_data: 构建data的第二种方式，通过ExcelParse构建好的excel data
         :param excel_type: 指定使用哪种data构建方式，file或data
         :param exclude: 第一种方式构建data时，excel文件要略去的列
+        :param ctrl_constructs_dict: dict {'subjective_grain_size':1, 'var_group':0} 用于控制是否有粘附比限制和配料分组要求
         """
         if excel_type == 'file':
             self.data = ExcelParse(excel_file=excel_file, exclude=exclude)
@@ -40,16 +42,22 @@ class Problem:
         self.ingredient_vars = {i: self.prob.Var(value=0, lb=0, ub=100) for i in self.data.Ingredients}
         self.h_2_0 = sum(self.ingredient_vars[k] * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
         self._constructs = {}
-        self._init_constructs()
+        self._init_constructs(ctrl_constructs_dict)
 
-    def _init_constructs(self):
+    def _init_constructs(self, ctrl_constructs_dict):
+        if not ctrl_constructs_dict:
+            # 如果没有传入控制，默认全部生成
+            ctrl_constructs_dict = {"subjective_grain_size": True, "var_group": True}
         # 目标函数self._constructs["objective"]在api处生成
         self._constructs["subjective"] = SubjectiveConstruct(self)
         self._constructs["var"] = VarConstruct(self)
-        self._constructs["var_group"] = VarGroupConstruct(self)
+        if ctrl_constructs_dict.get("subjective_grain_size"):
+            self._constructs["subjective_grain_size"] = SubjectiveGrainSizeConstruct(self)
+        if ctrl_constructs_dict.get("var_group"):
+            self._constructs["var_group"] = VarGroupConstruct(self)
 
     def build(self):
-        for i in ["objective", "subjective", "var", "var_group", "custom"]:
+        for i in ["objective", "subjective", "subjective_grain_size", "var", "var_group", "custom"]:
             if self._constructs.get(i):
                 self._constructs.get(i).build()
 

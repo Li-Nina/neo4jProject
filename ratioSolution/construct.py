@@ -36,6 +36,21 @@ class SubjectiveConstruct(Construct):
                 self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0))
 
 
+class SubjectiveGrainSizeConstruct(Construct):
+    def build(self):
+        grain_size_small_per = sum(self.pb.ingredient_vars[k] * check_nan(self.pb.data.Grain_size_small[k])
+                                   * (1 - check_nan(self.pb.data.H2O[k]) / 100)
+                                   for k in self.pb.data.Ingredients) / 10000
+        grain_size_large_per = sum(self.pb.ingredient_vars[k] * check_nan(self.pb.data.Grain_size_large[k])
+                                   * (1 - check_nan(self.pb.data.H2O[k]) / 100)
+                                   for k in self.pb.data.Ingredients) / 10000
+        grain_size = grain_size_small_per / grain_size_large_per
+        if not math.isnan(self.pb.data.Grain_size_restrict["down"]):
+            self.pb.prob.Equation(grain_size >= self.pb.data.Grain_size_restrict["down"])
+        if not math.isnan(self.pb.data.Grain_size_restrict["up"]):
+            self.pb.prob.Equation(grain_size <= self.pb.data.Grain_size_restrict["up"])
+
+
 class VarConstruct(Construct):
     def build(self):
         for k in self.pb.data.Ingredients:
