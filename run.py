@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# todo 4,源码保护问题
+# todo,源码保护问题
 from serverWeb import app
 
 if __name__ == '__main__':
