@@ -23,7 +23,7 @@ def index():
     return 'ratioAlgorithm server .........'
 
 
-@mod.route('/calculate')
+@mod.route('/calculate', methods=['GET', 'POST'])
 def ratio_algorithm_api():
     """
     @see https://zhuanlan.zhihu.com/p/23731819?refer=flask
@@ -35,7 +35,8 @@ def ratio_algorithm_api():
     try:
         file = request.files['file']
         if file and allowed_file(file.filename):
-            data = request.args.get('data')
+            # request.args获取GET请求参数，request.form获取POST表单数据，request.values获取所有数据
+            data = request.values.get('data')
             data_dict = json.loads(data) if data else {}
             top_n = data_dict.get('top_n')
             steps = data_dict.get('steps')
