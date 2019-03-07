@@ -92,7 +92,8 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
     else:
         # 默认计算的所有目标和权重 [ {tfe:1}, {al2o3:1} , {tfe:1, al2o3:1} ]
         weights_list = _default_weights_list_cal(excel_data, goal_fcn)
-    logger.info("------> %s", weights_list)
+    logger.info("--> top_n is %s, steps is %s, custom_weights is %s, cul_weights is %s, ctrl_dict is %s",
+                top_n, steps, custom_weights_list, weights_list, ctrl_constructs_dict)
 
     result_list = []
     for weight in weights_list:
@@ -104,7 +105,6 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
         _data = []
         for step in steps:
             # 可变参数函数接收到一个tuple，info函数里msg = msg % args,args是一个tuple，因此可以指定多个%s
-            logger.info("cal... step is %s, weight is %s", step, weight)
             lp = Problem(excel_data=excel_data, excel_type='data', ctrl_constructs_dict=ctrl_constructs_dict)
             objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
             lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
