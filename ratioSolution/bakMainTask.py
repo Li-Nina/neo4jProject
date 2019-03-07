@@ -8,7 +8,7 @@ from ratioSolution.util import cal_weights
 from utils.util import number_scalar
 
 try:
-    step = 1  # 循环计算步长
+    step = 0.01  # 循环计算步长
     iters = 5  # 循环次数
 
     start = time.time()
@@ -54,7 +54,7 @@ try:
         lp.solve(disp=True)
 
         lp.print_solve()
-        print(lp.get_price())
+        print(lp.get_price_result())
         ingredient_result = lp.get_ingredient_result()
         print(ingredient_result)
         if r_enable:
@@ -62,10 +62,10 @@ try:
         print("objfcnval ============================================================> ", lp.get_objfcnval())
 
         if objfcnval is None:  # 最优结果
-            lp.write_to_excel()
+            lp.write_excel()
 
         objfcnval = lp.get_objfcnval()
-        lp.write_to_excel("../data/results/result" + str(i) + ".xlsx")
+        lp.write_excel("../data/results/result" + str(i) + ".xlsx")
 
     end = time.time()
 except Exception as e:

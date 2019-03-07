@@ -43,14 +43,13 @@ def cal_weights(excel_data, **kw):
     # [('cost', 'tfe', 'sio2', 'al2o3'), (500, 50, 5, 3), (1, 5, 2, 1)]
     name_scalar_weight = list(zip(*name_scalar_weight))
 
-    logger.info('name_scalar_weight is ' + str(name_scalar_weight))
-
+    # logger.info('name_scalar_weight is ' + str(name_scalar_weight))
     scalar = [100 / i for i in name_scalar_weight[1]]
     weight = np.multiply(np.array(scalar), np.array(list(name_scalar_weight[2]))).tolist()
     normalization_weight = [100 * i / sum(weight) for i in weight]
 
     name_weight_dict = dict(zip(name_scalar_weight[0], normalization_weight))
-    logger.info('name_normalization_weight is ' + str(name_weight_dict))
+    # logger.info('name_normalization_weight is ' + str(name_weight_dict))
     return name_weight_dict
 
 
@@ -69,7 +68,7 @@ def _cal_scalar_r(excel_data, unused):
     cao_index = excel_data.Ingredients_list_name_index.get('CaO'.lower())
     sio2_index = excel_data.Ingredients_list_name_index.get('SiO2'.lower())
     if cao_index is not None and sio2_index is not None:
-        logger.info('_cal_scalar_r finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
+        # logger.info('_cal_scalar_r finding cao_index is %s, sio2_index is %s', cao_index, sio2_index)
         cao_dic = excel_data.Ingredients_list[cao_index]
         sio2_dic = excel_data.Ingredients_list[sio2_index]
         scalar = _cal_scalar(cao_dic, unused) / _cal_scalar(sio2_dic, unused)

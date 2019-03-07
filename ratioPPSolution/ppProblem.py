@@ -76,7 +76,7 @@ class PPProblem:
     def get_objfcnval(self):
         return value(self.prob.objective)
 
-    def write_to_excel(self, excel_file=None):
+    def write_excel(self, excel_file=None):
         if self.get_solve_status() == "Optimal":
             # 配比计算成分
             # 成本计算

@@ -79,7 +79,7 @@ class Problem:
         return [sum(self.ingredient_vars[k].value[0] * check_nan(Element[k]) * (100 - check_nan(self.data.H2O[k]))
                     / 100 for k in self.data.Ingredients) / (100 - h_2_0) for Element in self.data.Ingredients_list]
 
-    def get_price(self):
+    def get_price_result(self):
         dry_price = sum(check_nan(self.data.Cost[k]) * self.ingredient_vars[k].value[0]
                         * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients)
         h20_per = sum(
@@ -93,6 +93,17 @@ class Problem:
         Prices = namedtuple("Prices", ['dry_price', 'wet_price', 'obj_price'])
         return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price)
 
+    def get_grain_size_result(self):
+        grain_size_small_per = sum(self.ingredient_vars[k].value[0] * check_nan(self.data.Grain_size_small[k])
+                                   * (1 - check_nan(self.data.H2O[k]) / 100)
+                                   for k in self.data.Ingredients) / 10000
+        grain_size_large_per = sum(self.ingredient_vars[k].value[0] * check_nan(self.data.Grain_size_large[k])
+                                   * (1 - check_nan(self.data.H2O[k]) / 100)
+                                   for k in self.data.Ingredients) / 10000
+        grain_size = grain_size_small_per / grain_size_large_per
+        GrainSize = namedtuple("GrainSize", ['size_small', 'size_large', 'grain_result'])
+        return GrainSize(size_small=grain_size_small_per, size_large=grain_size_large_per, grain_result=grain_size)
+
     def get_objfcnval(self):
         return self.prob.options.objfcnval
 
@@ -103,7 +114,7 @@ class Problem:
         """
         return [self.ingredient_vars[k].value[0] for k in self.data.Ingredients]
 
-    def write_to_excel(self, excel_file=None):
+    def write_excel(self, excel_file=None):
         # 配比计算成分 成本计算
         result = [self.ingredient_vars[k].value[0] for k in self.data.Ingredients]
         name_result = [self.data.Ingredients_names["var_" + k] + "="
@@ -115,7 +126,7 @@ class Problem:
 
         # 混合料计算成分
         ingredient_result_list = self.get_ingredient_result()
-        prices = self.get_price()
+        prices = self.get_price_result()
 
         logger.info("optimization ingredient_result_list is: " + str(ingredient_result_list))
         logger.info("optimization prices is: " + str(prices))

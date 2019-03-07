@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import json
 import logging
-import time
 
 from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct, PriceObjectiveConstruct, \
     RObjectiveConstruct, SSObjectiveConstruct
@@ -94,7 +92,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
     else:
         # 默认计算的所有目标和权重 [ {tfe:1}, {al2o3:1} , {tfe:1, al2o3:1} ]
         weights_list = _default_weights_list_cal(excel_data, goal_fcn)
-    print("----->", weights_list)  # todo
+    logger.info("------> %s", weights_list)
 
     result_list = []
     for weight in weights_list:
@@ -105,6 +103,8 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     }
         _data = []
         for step in steps:
+            # 可变参数函数接收到一个tuple，info函数里msg = msg % args,args是一个tuple，因此可以指定多个%s
+            logger.info("cal... step is %s, weight is %s", step, weight)
             lp = Problem(excel_data=excel_data, excel_type='data', ctrl_constructs_dict=ctrl_constructs_dict)
             objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
             lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
@@ -157,7 +157,6 @@ def _goal_fcn_list(excel_data):
 
 
 def _objectives_list(lp, weights):
-    print(weights)  # todo
     name_list = list(weights.keys())
     _rst = []
     for name in name_list:

@@ -25,7 +25,7 @@ try:
     print(lp.get_ingredient_result())
     print(lp.get_price())
 
-    lp.write_to_excel()
+    lp.write_excel()
 except Exception as e:
     print(repr(e))
     logger.error(traceback.format_exc())
