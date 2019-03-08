@@ -42,8 +42,8 @@ def ratio_algorithm_api():
             steps = data_dict.get('steps')
             custom_weights_list = data_dict.get('custom_weights_list')
 
-            _ctrl_dic = {'subjective_grain_size': data_dict.get('subjective_grain_size'),
-                         'var_group': data_dict.get('var_group')}
+            _ctrl_dic = {'subjective_grain_size': data_dict.get('subjective_grain_size', 1),
+                         'var_group': data_dict.get('var_group', 1)}
 
             rst_list = ratio_algorithm(file, top_n=top_n, steps=steps, custom_weights_list=custom_weights_list,
                                        ctrl_constructs_dict=_ctrl_dic)

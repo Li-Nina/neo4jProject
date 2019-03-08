@@ -47,7 +47,7 @@ class Problem:
     def _init_constructs(self, ctrl_constructs_dict):
         if not ctrl_constructs_dict:
             # 如果没有传入控制，默认全部生成
-            ctrl_constructs_dict = {"subjective_grain_size": True, "var_group": True}
+            ctrl_constructs_dict = {"subjective_grain_size": 1, "var_group": 1}
         # 目标函数self._constructs["objective"]在api处生成
         self._constructs["subjective"] = SubjectiveConstruct(self)
         self._constructs["var"] = VarConstruct(self)
