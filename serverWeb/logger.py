@@ -14,7 +14,7 @@ class Logger(object):
         logger = logging.getLogger(name)
         logger.setLevel(logging.INFO)
         logger.handlers = []  # 在同一个python解释器下，getLogger name相同返回同一个logger
-        logger.addHandler(MyHandler(log_file_path=log_file_path, use_url_formatter=False).get())
+        logger.addHandler(MyHandler(log_file_path=log_file_path, use_addr_formatter=False).get())
         self._logger = logger
 
     def get(self):
@@ -23,14 +23,15 @@ class Logger(object):
 
 class MyHandler(object):
 
-    def __init__(self, log_file_path=None, use_url_formatter=False):
+    def __init__(self, log_file_path=None, use_addr_formatter=False):
         if not log_file_path:
             log_file_path = './log/ratioServer.log'
         handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024,
                                       backupCount=20, encoding=None, delay=0)
-        if use_url_formatter:
-            formatter = RequestFormatter('%(asctime)s %(remote_addr)s requested %(url)s\n'
-                                         '%(name)s %(levelname)s %(message)s')
+        if use_addr_formatter:
+            formatter = RequestFormatter('%(asctime)s %(remote_addr)s %(name)s %(levelname)s %(message)s')
+            # formatter = RequestFormatter('%(asctime)s %(remote_addr)s requested %(url)s\n'
+            #                              '%(name)s %(levelname)s %(message)s')
         else:
             formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
         handler.setFormatter(formatter)

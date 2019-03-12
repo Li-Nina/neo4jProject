@@ -13,7 +13,7 @@ from serverWeb.logger import MyHandler
 def config_loggers(flask_app):
     flask_app.logger.removeHandler(default_handler)  # app.logger name = 'flask.app'
     flask_app.logger.handlers = []
-    flask_app.logger.addHandler(MyHandler(log_file_path=LOG_PATH, use_url_formatter=False).get())
+    flask_app.logger.addHandler(MyHandler(log_file_path=LOG_PATH, use_addr_formatter=True).get())
     flask_app.logger.setLevel(logging.INFO)
 
 
