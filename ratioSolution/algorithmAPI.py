@@ -92,7 +92,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
     else:
         # 默认计算的所有目标和权重 [ {tfe:1}, {al2o3:1} , {tfe:1, al2o3:1} ]
         weights_list = _default_weights_list_cal(excel_data, goal_fcn)
-    logger.info("--> top_n is %s, steps is %s, custom_weights is %s, cul_weights is %s, ctrl_dict is %s",
+    logger.info("REQ--> top_n is %s, steps is %s, custom_weights is %s, cul_weights is %s, ctrl_dict is %s",
                 top_n, steps, custom_weights_list, weights_list, ctrl_constructs_dict)
 
     result_list = []

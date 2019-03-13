@@ -27,7 +27,7 @@ class MyHandler(object):
         if not log_file_path:
             log_file_path = './log/ratioServer.log'
         handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024,
-                                      backupCount=20, encoding=None, delay=0)
+                                      backupCount=20, encoding='utf-8', delay=0)
         if use_addr_formatter:
             formatter = RequestFormatter('%(asctime)s %(remote_addr)s %(name)s %(levelname)s %(message)s')
             # formatter = RequestFormatter('%(asctime)s %(remote_addr)s requested %(url)s\n'

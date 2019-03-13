@@ -47,6 +47,7 @@ def ratio_algorithm_api():
 
             rst_list = ratio_algorithm(file, top_n=top_n, steps=steps, custom_weights_list=custom_weights_list,
                                        ctrl_constructs_dict=_ctrl_dic)
+            logger.info("RESP--> %s", rst_list)
             return jsonify(convert_namedtuple(ResponseJson(status=0,
                                                            msg='ok',
                                                            result=rst_list
