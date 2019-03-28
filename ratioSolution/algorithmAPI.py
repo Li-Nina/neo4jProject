@@ -33,6 +33,21 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "ingredient_rst": [                 # ingredient_rst list<list>, 该step下的多个混合料元素结果
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [                 # grain_size_rst list<list>, 该step下的多个grain_size结果
+                    [1, 2, 3],                      # <0.25mm, >1.00mm, 粘附比
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [                      # price_rst list<list>, 该step下的多个price结果
+                    [1, 2, 3],                      # 成本, 扣水成本, 扣水烧损成本
+                    [4, 5, 6],
+                    [7, 8, 9]
                 ]
             }, {
                 "step": 0.01,
@@ -40,10 +55,40 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "ingredient_rst": [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
                 ]
             }, {
                 "step": 0.001,
                 "result": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "ingredient_rst": [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
@@ -60,6 +105,21 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "ingredient_rst": [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
                 ]
             }, {
                 "step": 0.01,
@@ -67,10 +127,40 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "ingredient_rst": [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
                 ]
             }, {
                 "step": 0.001,
                 "result": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "ingredient_rst": [
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+                    [7, 8, 9, 1, 2, 3, 4, 5, 6]
+                ],
+                "grain_size_rst": [
+                    [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9]
+                ],
+                "price_rst": [
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
@@ -116,6 +206,9 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
 
             _sub_data = {'step': step}
             _rst_list = []
+            _ingredient_rst = []
+            _grain_size_rst = []
+            _price_rst = []
             for i in range(top_n):
                 if objfcnval is not None:  # 防止objfcnval为0，不写if objfcnval
                     obj_scalar = number_scalar_modified(objfcnval)
@@ -128,8 +221,21 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     break
                 objfcnval = lp.get_objfcnval()
                 _rst_list.append(lp.get_result())
+                _ingredient_rst.append(lp.get_ingredient_result())
+
+                grain_nt = lp.get_grain_size_result()
+                _grain_size_rst.append([grain_nt.size_small,
+                                        grain_nt.size_large,
+                                        grain_nt.grain_result])
+                price_nt = lp.get_price_result()
+                _price_rst.append([price_nt.dry_price,
+                                   price_nt.wet_price,
+                                   price_nt.obj_price])
 
             _sub_data['result'] = _rst_list
+            _sub_data['ingredient_rst'] = _ingredient_rst
+            _sub_data['grain_size_rst'] = _grain_size_rst
+            _sub_data['price_rst'] = _price_rst
             _data.append(_sub_data)
         _sub_rst['data'] = _data
         result_list.append(_sub_rst)
