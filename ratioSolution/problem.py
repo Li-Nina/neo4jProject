@@ -41,6 +41,8 @@ class Problem:
         # 构建变量字典 {'x1': GKVariable, 'x2': GKVariable, 'x3': GKVariable, ... , 'x9': GKVariable}
         self.ingredient_vars = {i: self.prob.Var(value=0, lb=0, ub=100) for i in self.data.Ingredients}
         self.h_2_0 = sum(self.ingredient_vars[k] * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
+        self.s_s = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k] * (1 - check_nan(self.data.H2O[k]) / 100)
+                       / 100 for k in self.data.Ingredients) / (1 - self.h_2_0 / 100)
         self._constructs = {}
         self._init_constructs(ctrl_constructs_dict)
 
@@ -76,8 +78,12 @@ class Problem:
 
     def get_ingredient_result(self):
         h_2_0 = sum(self.ingredient_vars[k].value[0] * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
+        s_s = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k].value[0]
+                  * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients) / (
+                      1 - h_2_0 / 100)
         return [sum(self.ingredient_vars[k].value[0] * check_nan(Element[k]) * (100 - check_nan(self.data.H2O[k]))
-                    / 100 for k in self.data.Ingredients) / (100 - h_2_0) for Element in self.data.Ingredients_list]
+                    for k in self.data.Ingredients) / ((100 - h_2_0) * (100 - s_s)) for Element in
+                self.data.Ingredients_list]
 
     def get_price_result(self):
         dry_price = sum(check_nan(self.data.Cost[k]) * self.ingredient_vars[k].value[0]
@@ -90,8 +96,8 @@ class Problem:
         wet_price = dry_price / (1 - h20_per / 100)
         obj_price = wet_price / (1 - ss_per / 100)
 
-        Prices = namedtuple("Prices", ['dry_price', 'wet_price', 'obj_price'])
-        return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price)
+        Prices = namedtuple("Prices", ['dry_price', 'wet_price', 'obj_price', 'h20_per', 'ss_per'])
+        return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price, h20_per=h20_per, ss_per=ss_per)
 
     def get_grain_size_result(self):
         grain_size_small_per = sum(self.ingredient_vars[k].value[0] * check_nan(self.data.Grain_size_small[k])

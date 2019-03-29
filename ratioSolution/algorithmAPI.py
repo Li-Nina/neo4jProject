@@ -48,6 +48,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],                      # 成本, 扣水成本, 扣水烧损成本
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [                   # addition_rst list<list>, 该step下的多个h20,ss结果
+                    [1, 2],                         # 混合料水，混合料烧损
+                    [3, 4],
+                    [5, 6]
                 ]
             }, {
                 "step": 0.01,
@@ -70,6 +75,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [
+                    [1, 2],
+                    [3, 4],
+                    [5, 6]
                 ]
             }, {
                 "step": 0.001,
@@ -92,6 +102,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [
+                    [1, 2],
+                    [3, 4],
+                    [5, 6]
                 ]
             }]
         }, {
@@ -120,6 +135,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [
+                    [1, 2],
+                    [3, 4],
+                    [5, 6]
                 ]
             }, {
                 "step": 0.01,
@@ -142,6 +162,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [
+                    [1, 2],
+                    [3, 4],
+                    [5, 6]
                 ]
             }, {
                 "step": 0.001,
@@ -164,6 +189,11 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     [1, 2, 3],
                     [4, 5, 6],
                     [7, 8, 9]
+                ],
+                "addition_rst": [
+                    [1, 2],
+                    [3, 4],
+                    [5, 6]
                 ]
             }]
         }]
@@ -209,6 +239,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
             _ingredient_rst = []
             _grain_size_rst = []
             _price_rst = []
+            _addition_rst = []
             for i in range(top_n):
                 if objfcnval is not None:  # 防止objfcnval为0，不写if objfcnval
                     obj_scalar = number_scalar_modified(objfcnval)
@@ -231,11 +262,14 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                 _price_rst.append([price_nt.dry_price,
                                    price_nt.wet_price,
                                    price_nt.obj_price])
+                _addition_rst.append([price_nt.h20_per,
+                                      price_nt.ss_per])
 
             _sub_data['result'] = _rst_list
             _sub_data['ingredient_rst'] = _ingredient_rst
             _sub_data['grain_size_rst'] = _grain_size_rst
             _sub_data['price_rst'] = _price_rst
+            _sub_data['addition_rst'] = _addition_rst
             _data.append(_sub_data)
         _sub_rst['data'] = _data
         result_list.append(_sub_rst)
@@ -244,19 +278,22 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
 
 def _goal_fcn_list(excel_data):
     """
-    :return: 可以计算的目标名称，需小写,其中必包含cost和ss，最长为['cost', 'ss', 'tfe', 'al2o3', 'sio2', 'r']
+    :return: 可以计算的目标名称，需小写,其中必包含cost和ss，最长为['cost', 'ss', 'tfe', 'al2o3', 'sio2', 'cr', 'r']
     """
     _goal_list = ['cost', 'ss']
     tfe_index = excel_data.Ingredients_list_name_index.get('TFe'.lower())
     al2o3_index = excel_data.Ingredients_list_name_index.get('Al2O3'.lower())
     cao_index = excel_data.Ingredients_list_name_index.get('CaO'.lower())
     sio2_index = excel_data.Ingredients_list_name_index.get('SiO2'.lower())
+    cr_index = excel_data.Ingredients_list_name_index.get('Cr'.lower())
     if tfe_index is not None:
         _goal_list.append('tfe')
     if al2o3_index is not None:
         _goal_list.append('al2o3')
     if sio2_index is not None:
         _goal_list.append('sio2')
+    if cr_index is not None:
+        _goal_list.append('cr')
     if cao_index is not None and sio2_index is not None:
         _goal_list.append('r')
     return _goal_list
@@ -278,6 +315,8 @@ def _objectives_list(lp, weights):
             _rst.append((IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False), weights['sio2']))
         elif name.lower() == 'al2o3':
             _rst.append((IngredientObjectiveConstruct(lp, ingredient_name="Al2O3", maximum=False), weights['al2o3']))
+        elif name.lower() == 'cr':
+            _rst.append((IngredientObjectiveConstruct(lp, ingredient_name="Cr", maximum=False), weights['cr']))
         else:
             raise NotFoundError('objective not found!')
     return _rst

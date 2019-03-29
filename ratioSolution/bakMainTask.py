@@ -2,19 +2,20 @@
 # -*- coding:utf-8 -*-
 import time
 
-from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct
+from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct, PriceObjectiveConstruct, \
+    SSObjectiveConstruct, RObjectiveConstruct
 from ratioSolution.problem import Problem
 from ratioSolution.util import cal_weights
 from utils.util import number_scalar
 
 try:
-    step = 0.01  # 循环计算步长
+    step = 0.001  # 循环计算步长
     iters = 5  # 循环次数
 
     start = time.time()
 
-    lp = Problem()
-    weights = cal_weights(lp.data, **{'TFe': 1, 'SiO2': 1, 'COST': 1, 'R': 1, 'SS': 1})
+    lp = Problem("../data/template.xlsx")
+    weights = cal_weights(lp.data, **{'TFe': 1, 'SiO2': 1, 'COST': 1, 'R': 1, 'SS': 1, 'AL2O3': 1, 'Cr': 1})
     # weights = cal_weights(lp, **{'COST': 1000, 'R': 1})
     # weights = cal_weights(lp, **{'R': 1})
     # weights = cal_weights(lp, **{'COST': 1})
@@ -30,8 +31,12 @@ try:
                                            # (PriceObjectiveConstruct(lp), weights['cost']),
                                            # (IngredientObjectiveConstruct(lp, ingredient_name="TFe", maximum=True),
                                            #  weights['tfe']),
-                                           (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
-                                            weights['sio2']),
+                                           # (IngredientObjectiveConstruct(lp, ingredient_name="SiO2", maximum=False),
+                                           #  weights['sio2']),
+                                           # (IngredientObjectiveConstruct(lp, ingredient_name="al2o3", maximum=False),
+                                           #  weights['al2o3']),
+                                           (IngredientObjectiveConstruct(lp, ingredient_name="Cr", maximum=False),
+                                            weights['cr']),
                                            # (RObjectiveConstruct(lp), weights['r']),
                                            # (SSObjectiveConstruct(lp), weights['ss'])
                                            )

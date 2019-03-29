@@ -23,17 +23,16 @@ class Construct:
 class SubjectiveConstruct(Construct):
     def build(self):
         self.pb.prob.Equation(sum(self.pb.ingredient_vars[k] for k in self.pb.data.Ingredients) == 100)
-
+        # 烧损和水没有上下限限制,只计算其他元素上下限限制 ->20190339经博士确认
         elements_list = self.pb.data.Ingredients_list.copy()
-        elements_list.append(self.pb.data.SS)
         for Element in elements_list:
             ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(Element[k])
-                                 * (100 - check_nan(self.pb.data.H2O[k])) / 100
+                                 * (100 - check_nan(self.pb.data.H2O[k]))
                                  for k in self.pb.data.Ingredients)
             if not math.isnan(Element["down"]):
-                self.pb.prob.Equation(ingredient_per >= Element["down"] * (100 - self.pb.h_2_0))
+                self.pb.prob.Equation(ingredient_per >= Element["down"] * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
             if not math.isnan(Element["up"]):
-                self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0))
+                self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
 
 
 class SubjectiveGrainSizeConstruct(Construct):
