@@ -35,6 +35,24 @@ class SubjectiveConstruct(Construct):
                 self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
 
 
+# todo
+class IngredientsFixed(Construct):
+    def __init__(self, optimization_problem, ingredient_name, maximum=False):
+        Construct.__init__(self, optimization_problem)
+        objfcnval = self.pb.get_objfcnval()
+        print("mememe * ->", objfcnval)
+
+        index = self.pb.data.Ingredients_list_name_index.get(ingredient_name.lower())
+        ingredient = self.pb.data.Ingredients_list[index]
+        ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(ingredient[k])
+                             * (100 - check_nan(self.pb.data.H2O[k]))
+                             for k in self.pb.data.Ingredients)
+        self.pb.prob.Equation(ingredient_per == abs(objfcnval) * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
+        # print("*******1->>", self.pb._objectives)
+        self.pb.prob.Obj(PriceObjectiveConstruct(self.pb).get_obj())
+        # print("*******2->>", self.pb._objectives)
+
+
 class SubjectiveGrainSizeConstruct(Construct):
     def build(self):
         grain_size_small_per = sum(self.pb.ingredient_vars[k] * check_nan(self.pb.data.Grain_size_small[k])
@@ -81,13 +99,7 @@ class PriceObjectiveConstruct(Construct):
         Construct.__init__(self, optimization_problem)
         dry_price = sum(check_nan(self.pb.data.Cost[k]) * self.pb.ingredient_vars[k]
                         * (1 - check_nan(self.pb.data.H2O[k]) / 100) / 100 for k in self.pb.data.Ingredients)
-        h20_per = sum(
-            self.pb.ingredient_vars[k] * check_nan(self.pb.data.H2O[k]) / 100 for k in self.pb.data.Ingredients)
-        ss_per = sum(check_nan(self.pb.data.SS[k]) * self.pb.ingredient_vars[k]
-                     * (1 - check_nan(self.pb.data.H2O[k]) / 100) / 100 for k in self.pb.data.Ingredients) / (
-                         1 - h20_per / 100)
-
-        self._obj = (dry_price / (1 - h20_per / 100)) / (1 - ss_per / 100)
+        self._obj = (dry_price / (1 - self.pb.h_2_0 / 100)) / (1 - self.pb.s_s / 100)
 
     def get_obj(self):
         return self._obj
@@ -106,10 +118,10 @@ class IngredientObjectiveConstruct(Construct):
         if index is not None:
             ingredient = self.pb.data.Ingredients_list[index]
             ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(ingredient[k])
-                                 * (100 - check_nan(self.pb.data.H2O[k])) / 100
+                                 * (100 - check_nan(self.pb.data.H2O[k]))
                                  for k in self.pb.data.Ingredients)
             # 最小值
-            self._obj = ingredient_per / (100 - self.pb.h_2_0)
+            self._obj = ingredient_per / ((100 - self.pb.h_2_0) * (100 - self.pb.s_s))
             if maximum:
                 self._obj = -self._obj
         else:
@@ -144,6 +156,7 @@ class RObjectiveConstruct(Construct):
 '''
 
 
+# todo
 class SSObjectiveConstruct(Construct):
     def __init__(self, optimization_problem, maximum=False):
         Construct.__init__(self, optimization_problem)

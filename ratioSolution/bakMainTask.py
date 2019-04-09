@@ -2,26 +2,38 @@
 # -*- coding:utf-8 -*-
 import time
 
+from ratioSolution.algorithmAPI import _default_weights_list_cal, _goal_fcn_list, _custom_weights_list_cal
 from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjectiveConstruct, PriceObjectiveConstruct, \
-    SSObjectiveConstruct, RObjectiveConstruct
+    SSObjectiveConstruct, RObjectiveConstruct, IngredientsFixed
 from ratioSolution.problem import Problem
 from ratioSolution.util import cal_weights
 from utils.util import number_scalar
 
 try:
     step = 0.001  # 循环计算步长
-    iters = 5  # 循环次数
+    iters = 1  # 循环次数
 
     start = time.time()
 
-    lp = Problem("../data/template.xlsx")
-    weights = cal_weights(lp.data, **{'TFe': 1, 'SiO2': 1, 'COST': 1, 'R': 1, 'SS': 1, 'AL2O3': 1, 'Cr': 1})
-    # weights = cal_weights(lp, **{'COST': 1000, 'R': 1})
-    # weights = cal_weights(lp, **{'R': 1})
-    # weights = cal_weights(lp, **{'COST': 1})
+    lp = Problem("../data/template-validate-20190408.xls")
+    goal_fcn = _goal_fcn_list(lp.data)
+    weights_all = _default_weights_list_cal(lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'TFe': 1}], lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'SiO2': 1}], lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'COST': 1}], lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'R': 1}], lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'SS': 1}], lp.data, goal_fcn)
+    # weights_ = _custom_weights_list_cal([{'AL2O3': 1}], lp.data, goal_fcn)
+    weights_ = _custom_weights_list_cal([{'Cr': 1}], lp.data, goal_fcn)
+    print(weights_all)
+    print(weights_)
+    weights = weights_[0]
 
     cao_index = lp.data.Ingredients_list_name_index.get('CaO'.lower())
     sio2_index = lp.data.Ingredients_list_name_index.get('SiO2'.lower())
+
+    tfe_index = lp.data.Ingredients_list_name_index.get('TFe'.lower())
+
     r_enable = False
     if cao_index is not None and sio2_index is not None:
         r_enable = True
@@ -57,6 +69,11 @@ try:
 
         # Solve simulation
         lp.solve(disp=True)
+        print("======<<<", lp.get_objfcnval())
+
+        IngredientsFixed(lp, 'cr', maximum=False)
+        # IngredientsFixed(lp, 'tfe', maximum=True)
+        lp.solve(disp=True)
 
         lp.print_solve()
         print(lp.get_price_result())
@@ -66,10 +83,12 @@ try:
             print("R = ", ingredient_result[cao_index] / ingredient_result[sio2_index])  # 碱度R=CaO/SiO2，目标高碱度
         print("objfcnval ============================================================> ", lp.get_objfcnval())
 
+        # ingredient_result[tfe_index]
         if objfcnval is None:  # 最优结果
             lp.write_excel()
 
         objfcnval = lp.get_objfcnval()
+        print("-------->", objfcnval)
         lp.write_excel("../data/results/result" + str(i) + ".xlsx")
 
     end = time.time()

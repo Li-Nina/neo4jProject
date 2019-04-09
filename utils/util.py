@@ -58,6 +58,17 @@ def _float_scalar(num):
     return float(formats % (0.1 ** n))
 
 
+def adjust_digit(num, digit, maximum=False):
+    _place = 10 ** digit
+    _up = 0.1 ** digit
+    truncate = int(num * _place) / _place
+    # maximum=True，求最大值，num已经是最大值，直接截取
+    if not maximum:
+        # maximum=False，求最小值，num已经是最小值，截取后在末尾+1
+        truncate += _up
+    return truncate
+
+
 # noinspection PyProtectedMember
 def convert_namedtuple(nt, types='dict'):
     """
@@ -83,3 +94,8 @@ def current_time_millis():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+if __name__ == '__main__':
+    t = adjust_digit(2.334, 5, maximum=False)
+    print(t)
