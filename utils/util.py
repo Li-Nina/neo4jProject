@@ -97,5 +97,7 @@ def allowed_file(filename):
 
 
 if __name__ == '__main__':
-    t = adjust_digit(2.334, 5, maximum=False)
+    t = adjust_digit(88.8888888, 4, maximum=False)
+    print(t)
+    t = adjust_digit(88.888, 4, maximum=True)
     print(t)

@@ -6,7 +6,7 @@ import math
 from ratioSolution.customException import NotFoundError
 from ratioSolution.util import cal_weights
 from utils.config import APP_LOG_NAME
-from utils.util import check_nan
+from utils.util import check_nan, adjust_digit
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
@@ -40,14 +40,17 @@ class IngredientsFixed(Construct):
     def __init__(self, optimization_problem, ingredient_name, maximum=False):
         Construct.__init__(self, optimization_problem)
         objfcnval = self.pb.get_objfcnval()
-        print("mememe * ->", objfcnval)
+        print("mememe 1* ->", objfcnval)
 
         index = self.pb.data.Ingredients_list_name_index.get(ingredient_name.lower())
         ingredient = self.pb.data.Ingredients_list[index]
         ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(ingredient[k])
                              * (100 - check_nan(self.pb.data.H2O[k]))
                              for k in self.pb.data.Ingredients)
-        self.pb.prob.Equation(ingredient_per == abs(objfcnval) * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
+        obj_val = adjust_digit(num=abs(objfcnval), digit=4, maximum=maximum)  # 4位小数
+        print("mememe 2* ->", obj_val)
+
+        self.pb.prob.Equation(ingredient_per == obj_val * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
         # print("*******1->>", self.pb._objectives)
         self.pb.prob.Obj(PriceObjectiveConstruct(self.pb).get_obj())
         # print("*******2->>", self.pb._objectives)
