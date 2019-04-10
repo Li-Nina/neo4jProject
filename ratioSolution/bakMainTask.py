@@ -57,7 +57,7 @@ try:
     lp.solve(disp=True)
     objfcnval = lp.get_objfcnval()  # 单目标(初始)优化下的最优值(最小值)
     print("1111111----->", objfcnval)
-    obj_val = adjust_digit(num=objfcnval, digit=DIGIT + 1)  # DIGIT+1位小数
+    obj_val = adjust_digit(num=objfcnval, digit=DIGIT + 2)  # DIGIT+2位小数
     print("2222222----->", obj_val)
     obj_scalar = number_scalar_modified(obj_val)
     print("3333333----->", obj_scalar)

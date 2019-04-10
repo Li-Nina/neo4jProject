@@ -92,10 +92,3 @@ def current_time_millis():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-
-if __name__ == '__main__':
-    t = adjust_digit(-88.998879, 4)
-    print(t)
-    t = adjust_digit(546.71622462, 4)
-    print(t)
