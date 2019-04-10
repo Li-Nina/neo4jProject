@@ -2,8 +2,6 @@
 # -*- coding:utf-8 -*-
 
 # todo,源码保护问题
-# todo 1,混合料计算烧损更改，不除以h2o
-# todo 2,最优需要考虑价格，算法修改
 from serverWeb import app
 
 if __name__ == '__main__':

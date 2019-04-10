@@ -58,14 +58,12 @@ def _float_scalar(num):
     return float(formats % (0.1 ** n))
 
 
-def adjust_digit(num, digit, maximum=False):
+def adjust_digit(num, digit):
+    # num始终为最小化的值，此函数目的为截取精度并向上取值。num为正配料求最小化，num为负配料求最大化。
     _place = 10 ** digit
     _up = 0.1 ** digit
     truncate = int(num * _place) / _place
-    # maximum=True，求最大值，num已经是最大值，直接截取
-    if not maximum:
-        # maximum=False，求最小值，num已经是最小值，截取后在末尾+1
-        truncate += _up
+    truncate += _up
     return truncate
 
 
@@ -97,7 +95,7 @@ def allowed_file(filename):
 
 
 if __name__ == '__main__':
-    t = adjust_digit(88.8888888, 4, maximum=False)
+    t = adjust_digit(-88.998879, 4)
     print(t)
-    t = adjust_digit(88.888, 4, maximum=True)
+    t = adjust_digit(546.71622462, 4)
     print(t)

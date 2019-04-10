@@ -90,14 +90,14 @@ class Problem:
                         * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients)
         h20_per = sum(
             self.ingredient_vars[k].value[0] * check_nan(self.data.H2O[k]) / 100 for k in self.data.Ingredients)
-        ss_per = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k].value[0]
-                     * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients) / (
-                         1 - h20_per / 100)
+        ss_val = sum(check_nan(self.data.SS[k]) * self.ingredient_vars[k].value[0]
+                     * (1 - check_nan(self.data.H2O[k]) / 100) / 100 for k in self.data.Ingredients)
+        ss_per = ss_val / (1 - h20_per / 100)
         wet_price = dry_price / (1 - h20_per / 100)
         obj_price = wet_price / (1 - ss_per / 100)
 
         Prices = namedtuple("Prices", ['dry_price', 'wet_price', 'obj_price', 'h20_per', 'ss_per'])
-        return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price, h20_per=h20_per, ss_per=ss_per)
+        return Prices(dry_price=dry_price, wet_price=wet_price, obj_price=obj_price, h20_per=h20_per, ss_per=ss_val)
 
     def get_grain_size_result(self):
         grain_size_small_per = sum(self.ingredient_vars[k].value[0] * check_nan(self.data.Grain_size_small[k])

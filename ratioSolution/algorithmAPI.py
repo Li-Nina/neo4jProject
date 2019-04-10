@@ -7,9 +7,9 @@ from ratioSolution.construct import ObjectiveConstructBuilder, IngredientObjecti
 from ratioSolution.customException import NotFoundError
 from ratioSolution.problem import Problem
 from ratioSolution.util import cal_weights
-from utils.config import APP_LOG_NAME
+from utils.config import APP_LOG_NAME, DIGIT
 from utils.excelParse import ExcelParse
-from utils.util import number_scalar_modified
+from utils.util import number_scalar_modified, adjust_digit
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
@@ -223,17 +223,29 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                     'name': [excel_data.Ingredients_names["var_" + k] for k in excel_data.Ingredients]
                     }
         _data = []
+        # 可变参数函数接收到一个tuple，info函数里msg = msg % args,args是一个tuple，因此可以指定多个%s
+        lp = Problem(excel_data=excel_data, excel_type='data', ctrl_constructs_dict=ctrl_constructs_dict)
+        objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
+        lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
+        lp.build()
+        lp.prob.options.IMODE = 3  # steady state optimization
+
+        objfcn = objectives.get_obj()  # 目标函数公式
+
+        try:
+            lp.solve(disp=False)
+            objfcnval = lp.get_objfcnval()  # 单目标(初始)优化下的最优值(最小值)
+            obj_val = adjust_digit(num=objfcnval, digit=DIGIT + 1)  # DIGIT+1位小数
+            _obj_scalar = number_scalar_modified(obj_val)
+        except Exception:
+            # 没有最优解
+            obj_val = float('inf')
+            _obj_scalar = 0
+
+        lp.prob._objectives.clear()
+        lp.prob.Obj(PriceObjectiveConstruct(lp).get_obj())
         for step in steps:
-            # 可变参数函数接收到一个tuple，info函数里msg = msg % args,args是一个tuple，因此可以指定多个%s
-            lp = Problem(excel_data=excel_data, excel_type='data', ctrl_constructs_dict=ctrl_constructs_dict)
-            objectives = ObjectiveConstructBuilder(lp, *_objectives_list(lp, weight))
-            lp.add_construct("objective", objectives)  # 目标函数self._constructs["objective"]在此处生成
-            lp.build()
-            lp.prob.options.IMODE = 3  # steady state optimization
-
-            objfcn = objectives.get_obj()  # 目标函数公式
-            objfcnval = None  # 上一次目标函数计算值
-
+            plus_step = step * _obj_scalar
             _sub_data = {'step': step}
             _rst_list = []
             _ingredient_rst = []
@@ -241,16 +253,15 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
             _price_rst = []
             _addition_rst = []
             for i in range(top_n):
-                if objfcnval is not None:  # 防止objfcnval为0，不写if objfcnval
-                    obj_scalar = number_scalar_modified(objfcnval)
-                    lp.prob.Equation(objfcn >= objfcnval + step * obj_scalar)
-                # Solve simulation
+                if i > 0:
+                    lp.prob._equations.pop()
+                lp.prob.Equation(objfcn == obj_val + i * plus_step)
                 try:
+                    # Solve simulation
                     lp.solve(disp=False)
                 except Exception:
                     # 没有最优解，跳出循环
                     break
-                objfcnval = lp.get_objfcnval()
                 _rst_list.append(lp.get_result())
                 _ingredient_rst.append(lp.get_ingredient_result())
 
@@ -264,6 +275,7 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
                                    price_nt.obj_price])
                 _addition_rst.append([price_nt.h20_per,
                                       price_nt.ss_per])
+            lp.prob._equations.pop()
 
             _sub_data['result'] = _rst_list
             _sub_data['ingredient_rst'] = _ingredient_rst
