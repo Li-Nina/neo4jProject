@@ -9,6 +9,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0')
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
+# pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn -r requirements.txt
 
 # nohup gunicorn -w 2 -b 0.0.0.0:5000 run:app &
 # nohup gunicorn -w 2 -b 0.0.0.0:5000 run:app >nohup.log 2>&1 &
