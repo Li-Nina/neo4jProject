@@ -126,5 +126,26 @@ def adjust_digit(num, digit):
     return truncate
 
 
+def adjust_digit_size(num, digit, size_type):
+    if num <= 0:
+        return num
+
+    _place = 10 ** digit
+    val = int(num * _place)
+    ones = abs(val) % 10
+
+    truncate = val / _place
+
+    return truncate
+
+    # _size = 9 * (0.1 ** digit)
+    # if size_type == 'up':
+    #     return num + _size
+    # elif size_type == 'down':
+    #     return num - _size
+    # else:
+    #     return num
+
+
 if __name__ == '__main__':
-    print(adjust_digit(123.23232323, 3))
+    print(adjust_digit_size(23.3322332232, 3 + 2, 'up'))
