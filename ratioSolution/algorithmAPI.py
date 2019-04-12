@@ -235,7 +235,8 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
         try:
             lp.solve(disp=False)
             objfcnval = lp.get_objfcnval()  # 单目标(初始)优化下的最优值(最小值)
-            obj_val = adjust_digit(num=objfcnval, digit=DIGIT + 2)  # DIGIT+2位小数
+            digit = 10 if (len(weight) == 1 and 'cost' in weight) else DIGIT + 1  # 求价格最优精确到10位小数
+            obj_val = adjust_digit(num=objfcnval, digit=digit)  # DIGIT+1位小数
             _obj_scalar = number_scalar_modified(obj_val)
         except Exception:
             # 没有最优解

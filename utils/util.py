@@ -58,15 +58,6 @@ def _float_scalar(num):
     return float(formats % (0.1 ** n))
 
 
-def adjust_digit(num, digit):
-    # num始终为最小化的值，此函数目的为截取精度并向上取值。num为正配料求最小化，num为负配料求最大化。
-    _place = 10 ** digit
-    _up = 0.1 ** digit
-    truncate = int(num * _place) / _place
-    truncate += _up
-    return truncate
-
-
 # noinspection PyProtectedMember
 def convert_namedtuple(nt, types='dict'):
     """
@@ -92,3 +83,48 @@ def current_time_millis():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+def adjust_digit(num, digit):
+    """
+    修改digit位实现增大num，并保证四舍五入不影响digit的上一位
+    num始终为最小化的值，此函数目的为截取精度并向上取值。num为正配料求最小化，num为负配料求最大化。
+    :param num: num
+    :param digit: DIGIT + 1; 精确到DIGIT位，因此操作DIGIT的后一位
+    """
+    if num == 0:
+        return num
+    _place = 10 ** digit
+    _up = 0.1 ** digit
+    val = int(num * _place)
+    ones = abs(val) % 10
+
+    if num > 0 and ones == 4:
+        # num>0,即求abs(num)的最小值。此时num已经是最小值，返回值应放大num
+        # 如果末尾为4，直接+1为5后存在四舍五入问题。
+        for i in range(5):
+            _place *= 10
+            _up *= 0.1
+            val = int(num * _place)
+            ones = abs(val) % 10
+            if ones != 9:
+                break
+    elif num < 0 and ones == 5:
+        # num<0,即求abs(num)的最大值。此时abs(num)已经是最大值，返回值应放小abs(num),即放大num
+        # 如果末尾为5，直接-1为4后存在四舍五入问题。
+        for i in range(5):
+            _place *= 10
+            _up *= 0.1
+            val = int(num * _place)
+            ones = abs(val) % 10
+            if ones != 0:
+                if ones == 1:
+                    _up *= 0.1
+                break
+    truncate = val / _place
+    truncate += _up
+    return truncate
+
+
+if __name__ == '__main__':
+    print(adjust_digit(123.23232323, 3))
