@@ -130,22 +130,36 @@ def adjust_digit_size(num, digit, size_type):
     if num <= 0:
         return num
 
-    _place = 10 ** digit
-    val = int(num * _place)
-    ones = abs(val) % 10
+    _place_former = 10 ** (digit - 1)
+    _place = _place_former * 10
+    _up = 0.1 ** digit
+    ones_former = abs(int(num * _place_former)) % 10  # 前一位小数，当为4时且后面全为9时坚决不能动，防止进位
+    ones = abs(int(num * _place)) % 10
 
-    truncate = val / _place
-
-    return truncate
-
-    # _size = 9 * (0.1 ** digit)
-    # if size_type == 'up':
-    #     return num + _size
-    # elif size_type == 'down':
-    #     return num - _size
-    # else:
-    #     return num
-
-
-if __name__ == '__main__':
-    print(adjust_digit_size(23.3322332232, 3 + 2, 'up'))
+    if size_type == 'up':
+        if ones == 9:
+            for i in range(5):
+                _place *= 10
+                ones = abs(int(num * _place)) % 10
+                _place_former *= 10
+                _up *= 0.1
+                if ones != 9:
+                    return int(num * _place_former) / _place_former + 9 * _up
+            if ones_former == 4:
+                # 前一位小数为4且后5位都为9，直接返回原值
+                return num
+            else:
+                # 前一位小数不为4且后5位都为9，第6位+1
+                _place *= 10
+                _up *= 0.1
+                return int(num * _place) / _place + _up
+        else:
+            return int(num * _place_former) / _place_former + 9 * _up
+    elif size_type == 'down':
+        if ones_former == 5 and ones == 0:
+            return int(num * _place_former) / _place_former
+        else:
+            rst = int(num * _place) / _place - _up
+            return rst if rst > 0 else 0
+    else:
+        return num
