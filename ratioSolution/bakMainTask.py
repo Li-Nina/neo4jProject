@@ -15,7 +15,7 @@ try:
 
     start = time.time()
 
-    lp = Problem("../data/template-validate-20190408.xls")
+    lp = Problem("../data/template-validate-20190412.xls")
     goal_fcn = _goal_fcn_list(lp.data)
     weights_all = _default_weights_list_cal(lp.data, goal_fcn)
     # weights_ = _custom_weights_list_cal([{'TFe': 1, 'SiO2': 1, 'COST': 1}], lp.data, goal_fcn)
@@ -67,15 +67,19 @@ try:
     lp.prob._objectives.clear()
     lp.prob.Obj(PriceObjectiveConstruct(lp).get_obj())
     print("@@@@@@@@@@@@", lp.prob._objectives)
+
+    temp = float('inf')
     for i in range(iters):
         print("@@@@@@@@@@@@", lp.prob._equations)
         if i > 0:
             lp.prob._equations.pop()
-        lp.prob.Equation(objfcn == obj_val + i * plus_step)
+        lp.prob.Equation(objfcn <= obj_val + i * plus_step)
         print("@@@@@@@@@@@@", lp.prob._equations)
 
         lp.solve(disp=True)
         print("======<<<", lp.get_objfcnval())
+        print(temp == lp.get_objfcnval())
+        temp = lp.get_objfcnval()
 
         lp.print_solve()
         print(lp.get_price_result())

@@ -253,16 +253,34 @@ def ratio_algorithm(excel_template, top_n=None, steps=None, custom_weights_list=
             _grain_size_rst = []
             _price_rst = []
             _addition_rst = []
+
+            price = float('inf')
+            price_ = float('inf')
             for i in range(top_n):
                 if i > 0:
                     lp.prob._equations.pop()
-                lp.prob.Equation(objfcn == obj_val + i * plus_step)
+                lp.prob.Equation(objfcn <= obj_val + i * plus_step)
                 try:
                     # Solve simulation
                     lp.solve(disp=False)
                 except Exception:
                     # 没有最优解，跳出循环
                     break
+
+                if price == lp.get_objfcnval() or price_ == lp.get_objfcnval():
+                    lp.prob._equations.pop()
+                    lp.prob.Equation(objfcn == obj_val + i * plus_step)
+                    try:
+                        # Solve simulation
+                        lp.solve(disp=False)
+                        price_ = lp.get_objfcnval()
+                    except Exception:
+                        # 没有最优解，跳出循环
+                        break
+                else:
+                    price = lp.get_objfcnval()
+                    price_ = lp.get_objfcnval()
+
                 _rst_list.append(lp.get_result())
                 _ingredient_rst.append(lp.get_ingredient_result())
 
