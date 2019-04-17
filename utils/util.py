@@ -87,10 +87,12 @@ def allowed_file(filename):
 
 def adjust_digit(num, digit):
     """
+    优化结果按精度近似
     修改digit位实现增大num，并保证四舍五入不影响digit的上一位
     num始终为最小化的值，此函数目的为截取精度并向上取值。num为正配料求最小化，num为负配料求最大化。
     :param num: num
     :param digit: DIGIT + 1; 精确到DIGIT位，因此操作DIGIT的后一位
+    :return: 近似放大后的优化结果值
     """
     if num == 0:
         return num
@@ -127,6 +129,13 @@ def adjust_digit(num, digit):
 
 
 def adjust_digit_size(num, digit, size_type):
+    """
+    约束条件上下限按精度近似
+    :param num: 完全精度的上下限要求
+    :param digit: 近似的位数
+    :param size_type: 上限或下限,'up' or 'down'
+    :return: 近似放大后的精度值
+    """
     if num <= 0:
         return num
 
