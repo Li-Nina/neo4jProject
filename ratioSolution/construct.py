@@ -6,7 +6,7 @@ import math
 from ratioSolution.customException import NotFoundError
 from ratioSolution.util import cal_weights
 from utils.config import APP_LOG_NAME
-from utils.util import check_nan
+from utils.util import check_nan, delta_fuc
 
 logger = logging.getLogger(APP_LOG_NAME + "." + __name__)
 
@@ -29,13 +29,11 @@ class SubjectiveConstruct(Construct):
             ingredient_per = sum(self.pb.ingredient_vars[k] * check_nan(Element[k])
                                  * (100 - check_nan(self.pb.data.H2O[k]))
                                  for k in self.pb.data.Ingredients)
+            down, up = delta_fuc(Element["down"], Element["up"])
             if not math.isnan(Element["down"]):
-                # down_num = adjust_digit_size(num=Element["down"], digit=DIGIT + 2, size_type='down')
-                # 20190417经总确认约束满足全部精度，不近似
-                self.pb.prob.Equation(ingredient_per >= Element["down"] * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
+                self.pb.prob.Equation(ingredient_per >= down * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
             if not math.isnan(Element["up"]):
-                # up_num = adjust_digit_size(num=Element["up"], digit=DIGIT + 2, size_type='up')
-                self.pb.prob.Equation(ingredient_per <= Element["up"] * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
+                self.pb.prob.Equation(ingredient_per <= up * (100 - self.pb.h_2_0) * (100 - self.pb.s_s))
 
 
 class SubjectiveGrainSizeConstruct(Construct):
@@ -47,17 +45,11 @@ class SubjectiveGrainSizeConstruct(Construct):
                                    * (1 - check_nan(self.pb.data.H2O[k]) / 100)
                                    for k in self.pb.data.Ingredients) / 10000
         grain_size = grain_size_small_per / grain_size_large_per
+        down, up = delta_fuc(self.pb.data.Grain_size_restrict["down"], self.pb.data.Grain_size_restrict["up"])
         if not math.isnan(self.pb.data.Grain_size_restrict["down"]):
-            self.pb.prob.Equation(
-                # grain_size >= adjust_digit_size(num=self.pb.data.Grain_size_restrict["down"], digit=DIGIT + 2,
-                #                                 size_type='down'))
-                # 20190417经总确认约束满足全部精度，不近似
-                grain_size >= self.pb.data.Grain_size_restrict["down"])
+            self.pb.prob.Equation(grain_size >= down)
         if not math.isnan(self.pb.data.Grain_size_restrict["up"]):
-            self.pb.prob.Equation(
-                # grain_size <= adjust_digit_size(num=self.pb.data.Grain_size_restrict["up"], digit=DIGIT + 2,
-                #                                 size_type='up'))
-                grain_size <= self.pb.data.Grain_size_restrict["up"])
+            self.pb.prob.Equation(grain_size <= up)
 
 
 class VarConstruct(Construct):

@@ -4,7 +4,7 @@ import json
 import math
 import time
 
-from utils.config import ALLOWED_EXTENSIONS
+from utils.config import ALLOWED_EXTENSIONS, DELTA
 
 
 def check_nan(num):
@@ -172,3 +172,16 @@ def adjust_digit_size(num, digit, size_type):
             return rst if rst > 0 else 0
     else:
         return num
+
+
+def delta_fuc(low, high):
+    down = float("-inf")
+    up = float("inf")
+    if not math.isnan(low):
+        down = low + DELTA
+    if not math.isnan(high):
+        up = high - DELTA
+    if down >= up:
+        down = low
+        up = high
+    return down, up
