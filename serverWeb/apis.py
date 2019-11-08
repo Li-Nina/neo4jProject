@@ -3,9 +3,17 @@
 import logging
 
 from flask import request, Flask, jsonify
-
-from serverWeb.repository import getExpertsNodeList
+from jieba.analyse.analyzer import ChineseAnalyzer
 from utils.util import fetchEduAndMajor
+from config import INDEX_PATH
+from serverWeb.repository import getExpertsNodeList
+import os.path
+import csv
+from whoosh.index import create_in
+from whoosh.fields import *
+from whoosh.index import open_dir
+from whoosh.qparser import QueryParser
+from whoosh.qparser import MultifieldParser
 
 
 def after_request(response):
@@ -30,7 +38,6 @@ def get_index():
 @app.route("/expert", methods=['GET', 'POST'])
 def expertsAndFiled():
     inputs = request.values.get('input')
-    print(inputs)
     if not inputs:
         return jsonify([])
     f = fetchEduAndMajor(inputs)
@@ -50,33 +57,44 @@ def expertsAndFiled():
     return jsonify(rst)
 
 
+@app.route("/essearch", methods=['GET', 'POST'])
+def esSearcher():
+    inputs = request.values.get('input')
+    if not inputs:
+        return jsonify([])
+    path = INDEX_PATH + "experts"
+    ix = open_dir(path)
+    with ix.searcher() as searcher:
+        # parser = QueryParser("project", schema=ix.schema)
+        mparser = MultifieldParser(["project", "filed", "degree", "college", "subject"], schema=ix.schema)
+        # keyword = parser.parse("863计划")  # 构造查询语句
+        keyword = mparser.parse(inputs)  # 构造查询语句
+        results = searcher.search(keyword, limit=10)
+        res = []
+        for result in results:
+            res.append(dict(result))
+        return jsonify(res)
 
-from whoosh.index import create_in
-from whoosh.fields import *
-from jieba.analyse.analyzer import ChineseAnalyzer
-import os.path
-import csv
-from whoosh.index import open_dir
-from whoosh.qparser import QueryParser
-from whoosh.qparser import MultifieldParser
 
+@app.route("/create_index", methods=['GET', 'POST'])
 def create_index():
     analyzer = ChineseAnalyzer()
     schema = Schema(name=ID(stored=True, unique=True), college=TEXT(stored=True, analyzer=analyzer),
-                    education=TEXT(stored=True, analyzer=analyzer),degree=TEXT(stored=True, analyzer=analyzer),
-                    job=TEXT(stored=True, analyzer=analyzer),subject=TEXT(stored=True, analyzer=analyzer),
-                    research=TEXT(stored=True, analyzer=analyzer),department=TEXT(stored=True, analyzer=analyzer),
-                    title=TEXT(stored=True, analyzer=analyzer),filed=TEXT(stored=True, analyzer=analyzer),
+                    education=TEXT(stored=True, analyzer=analyzer), degree=TEXT(stored=True, analyzer=analyzer),
+                    job=TEXT(stored=True, analyzer=analyzer), subject=TEXT(stored=True, analyzer=analyzer),
+                    research=TEXT(stored=True, analyzer=analyzer), department=TEXT(stored=True, analyzer=analyzer),
+                    title=TEXT(stored=True, analyzer=analyzer), filed=TEXT(stored=True, analyzer=analyzer),
                     project=TEXT(stored=True, analyzer=analyzer))  # 声明索引模式
-    if not os.path.exists("index"):
-        os.mkdir("index")
-    ix = create_in("index", schema)
+    path = INDEX_PATH + "experts"
+
+    if not os.path.exists(path):
+        os.mkdir(path)
+    ix = create_in(path, schema)
     writer = ix.writer()
 
-    csv_file = open('F:/con_experts_pro_3.csv', 'r',encoding="utf-8")
+    csv_file = open('data/con_experts_pro.csv', 'r', encoding="utf-8")
     data = csv.reader(csv_file)
     for i in data:
-        # print(i)
         writer.add_document(
             name=i[2],
             college=i[3], education=i[4],
@@ -85,26 +103,5 @@ def create_index():
             department=i[12], title=i[13],
             filed=i[15], project=i[16]
         )
-
-
     writer.commit()
-# create_index = create_index()
-# if not os.path.exists("index"):  # 查询时没有索引文件，需先创建索引文件
-#     create_index()
-# ix = open_dir("index")  # 读取索引文件
-create_index()
-ix = open_dir("index")
-with ix.searcher() as searcher:
-    # parser = QueryParser("project", schema=ix.schema)
-    mparser=MultifieldParser(["project", "filed", "degree","college","subject"],schema = ix.schema)
-    # keyword = parser.parse("863计划")  # 构造查询语句
-    keyword = mparser.parse("863计划 分布式 博士")  # 构造查询语句
-    results = searcher.search(keyword, limit=10)
-    res = []
-    for result in results:
-        print(dict(result))  # 打印查询结果
-        res.append(dict(result))
-    if not res:
-        print("没有此内容！")
-
-
+    return "success"
