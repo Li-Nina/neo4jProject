@@ -1,8 +1,0 @@
-.idea
-.git
-venv
-__pycache__
-~$*
-data
-log/*
-README.md

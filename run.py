@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# todo,源码保护问题
-from serverWeb import app
+from serverWeb.apis import app
 
 if __name__ == '__main__':
     # 此处启动测试服务器，部署时不会执行这里
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=12020)
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
 # pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn -r requirements.txt
