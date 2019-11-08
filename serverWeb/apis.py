@@ -49,8 +49,8 @@ def expertsAndFiled():
     results = getExpertsNodeList(f['edu'], f['major'])
     print(results)
     for record in results:
-        exp = {**{"id": record["experts"].id, **{"expert_ID": record["experts"]["Expert_ID"]},
-                  **dict(record["experts"].items())}}
+        exp = {**{"id": record["experts"].id}, **{"expert_ID": record["experts"]["Expert_ID"]},
+                  **dict(record["experts"].items())}
         exp.pop("Expert_ID")
         rst.append({"experts": exp, "field": {**{"id": record["field"].id}, **dict(record["field"].items())}})
 
