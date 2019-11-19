@@ -1,23 +1,22 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import csv
 import logging
+# from serverWeb.esRepository import searchExpert
+import os.path
 
 from flask import request, Flask, jsonify
 from jieba.analyse.analyzer import ChineseAnalyzer
-
-from serverWeb.esRepository import searchExpert
-from utils.util import fetchEduAndMajor
-from config import INDEX_PATH
-from serverWeb.repository import getExpertsNodeList
-# from serverWeb.esRepository import searchExpert
-import os.path
-import csv
-from whoosh.index import create_in
 from whoosh.fields import *
+from whoosh.index import create_in
 from whoosh.index import open_dir
-from whoosh.qparser import QueryParser
 from whoosh.qparser import MultifieldParser
-from elasticsearch import Elasticsearch
+
+from config import INDEX_PATH
+from serverWeb.esRepository import get_data_by_body
+from serverWeb.repository import getExpertsNodeList
+from utils.util import fetchEduAndMajor
+
 
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -110,13 +109,23 @@ def create_index():
     return "success"
 
 
-@app.route("/es_my_new", methods=['GET', 'POST'])
-def es_my_new():
+# @app.route("/es_my_delete_index", methods=['GET', 'POST'])
+# def es_my_delete_index():
+#     delete_index()
+#     return "success"
+#
+#
+# @app.route("/es_my_create_index", methods=['GET', 'POST'])
+# def es_my_create_index():
+#     create_indexs_es()
+#     index_data_from_csv('../data/con_experts_pro.csv')
+#     return "success"
+
+
+@app.route("/es_my_get_data", methods=['GET', 'POST'])
+def es_my_get_data():
     inputs = request.values.get('input')
     if not inputs:
         return jsonify([])
-    my_index = 'con_pro'
-    my_doc_type = '_doc'
-    es = Elasticsearch()
-    # searchExpert("区块链领域参与863项目的专家有哪些")
-    searchExpert(inputs)
+    rst = get_data_by_body(inputs)
+    return jsonify(rst['hits']['hits'])

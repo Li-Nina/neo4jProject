@@ -6,6 +6,7 @@ from serverWeb.apis import app
 if __name__ == '__main__':
     # 此处启动测试服务器，部署时不会执行这里
     app.run(host='0.0.0.0', port=12020)
+    # app.run(host='0.0.0.0', port=12200)
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
 # pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn -r requirements.txt
