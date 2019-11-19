@@ -4,9 +4,12 @@ import logging
 
 from flask import request, Flask, jsonify
 from jieba.analyse.analyzer import ChineseAnalyzer
+
+from serverWeb.esRepository import searchExpert
 from utils.util import fetchEduAndMajor
 from config import INDEX_PATH
 from serverWeb.repository import getExpertsNodeList
+# from serverWeb.esRepository import searchExpert
 import os.path
 import csv
 from whoosh.index import create_in
@@ -14,7 +17,7 @@ from whoosh.fields import *
 from whoosh.index import open_dir
 from whoosh.qparser import QueryParser
 from whoosh.qparser import MultifieldParser
-
+from elasticsearch import Elasticsearch
 
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -50,7 +53,7 @@ def expertsAndFiled():
     print(results)
     for record in results:
         exp = {**{"id": record["experts"].id}, **{"expert_ID": record["experts"]["Expert_ID"]},
-                  **dict(record["experts"].items())}
+               **dict(record["experts"].items())}
         exp.pop("Expert_ID")
         rst.append({"experts": exp, "field": {**{"id": record["field"].id}, **dict(record["field"].items())}})
 
@@ -105,3 +108,15 @@ def create_index():
         )
     writer.commit()
     return "success"
+
+
+@app.route("/es_my_new", methods=['GET', 'POST'])
+def es_my_new():
+    inputs = request.values.get('input')
+    if not inputs:
+        return jsonify([])
+    my_index = 'con_pro'
+    my_doc_type = '_doc'
+    es = Elasticsearch()
+    # searchExpert("区块链领域参与863项目的专家有哪些")
+    searchExpert(inputs)

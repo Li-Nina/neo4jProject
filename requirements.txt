@@ -17,3 +17,4 @@ six==1.12.0
 synonyms==3.10.2
 Werkzeug==0.16.0
 Whoosh==2.7.4
+elasticsearch-dsl>=7.0.0,<8.0.0
