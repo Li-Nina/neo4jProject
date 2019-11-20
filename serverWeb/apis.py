@@ -127,9 +127,18 @@ def es_my_get_data():
     inputs = request.values.get('input')
     if not inputs:
         return jsonify([])
+
+    ###############################################
+    segments = jieba.cut(inputs)
+    ###############################################
+
     rst = get_data_by_body(inputs)
     json_hit = [item['_source'] for item in rst['hits']['hits']]
-    return jsonify(json_hit)
+
+    ###############################################
+    return jsonify({'json_hit': json_hit, 'segments': segments})
+    ###############################################
+
     # return jsonify(rst['hits']['hits'])
     # json_hits = jsonify(rst['hits']['hits'])
     # return jsonify(json_hits['_source'])
