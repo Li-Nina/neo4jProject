@@ -128,4 +128,8 @@ def es_my_get_data():
     if not inputs:
         return jsonify([])
     rst = get_data_by_body(inputs)
-    return jsonify(rst['hits']['hits'])
+    json_hit = [item['_source'] for item in rst['hits']['hits']]
+    return jsonify(json_hit)
+    # return jsonify(rst['hits']['hits'])
+    # json_hits = jsonify(rst['hits']['hits'])
+    # return jsonify(json_hits['_source'])
