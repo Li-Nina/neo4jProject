@@ -17,7 +17,7 @@ from config import INDEX_PATH
 from serverWeb.esRepository import get_data_by_body
 from serverWeb.repository import getExpertsNodeList
 from utils.util import fetchEduAndMajor
-
+from utils.util2 import fetchEduAndMajor_es
 
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -129,7 +129,8 @@ def es_my_get_data():
     if not inputs:
         return jsonify([])
     ###############################################
-    segments = jieba.lcut(inputs)
+    segments = fetchEduAndMajor_es(inputs)
+    # segments = jieba.lcut(inputs)
     ###############################################
     rst = get_data_by_body(inputs)
     # ###############################################
