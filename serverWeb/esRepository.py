@@ -132,7 +132,7 @@ def index_data_from_csv(csvfile):
         index = 0
         doc = {}
         for item in list_data:
-            if index > 1:  # 第一行是标题
+            if index > 0:  # 第一行是标题
                 doc['Expert_ID'] = item[0]
                 doc['fieldID'] = item[1]
                 doc['name'] = item[2]
@@ -170,9 +170,12 @@ def get_data_by_body(input):
         "query": {
             "multi_match": {
                 "query": input,
+                "type": "best_fields",
+                # "type": "most_fields",
                 # "fields" : ["学历", "领域",'单位','职务','职称','学科','研究方向','身份','领域','项目']
                 "fields": ['college', 'education', 'degree', 'job', 'field', 'subject', 'research', 'department',
-                           'title', 'project']
+                           'title', 'project'],
+                "tie_breaker": 0.3
 
             }
         }
