@@ -33311,11 +33311,13 @@ a.ant-btn-sm {
     left: 0;
     right: 0;
     bottom: 37px;
-    background:url(d1dc36dfbf66668495ed909fa93cc2c9.png);
+    background:url(c9dc71f8be4b070adcf60bc1e3ca05ea.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .formWrapper{
     width: 500px;
-    margin: 0px auto;
+    margin: 200px 0 0 70%;
     background: rgb(255, 255, 255);
     margin-top: 200px;
     padding: 50px 100px;
@@ -33328,7 +33330,7 @@ a.ant-btn-sm {
 }
  .login-form-button {
      width: 100%;
-     background:rgba(124,154,93,1);
+     background:rgba(63,116,170);
      border:0;
      color:#fff;
      border-radius: 5px;
@@ -34295,8 +34297,30 @@ a.ant-btn-sm {
     padding:8px;
     color: #222;
     text-decoration: none;
-}.cardImg{
-    width:300px;
+}.cardImg1{
+    width:160px;
+    margin:0 auto;
+}
+.cardImg2{
+    width:160px;
+    margin:0 auto;
+}
+.cardImg3{
+    width:160px;
+    margin:0 auto;
+
+}
+.cardImg4{
+    width:160px;
+    height: 160px;
+    margin:0 auto;
+}
+.cardImg5{
+    width:160px;
+    margin:0 auto;
+}
+.cardImg6{
+    width:160px;
     margin:0 auto;
 }/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */

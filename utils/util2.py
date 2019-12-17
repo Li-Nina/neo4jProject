@@ -36,6 +36,7 @@ def fetchEduAndMajor_es(text):
     remove_text = removePunctuation_es(text)
     remove_none = remove_text.replace(" ", "")
     remove_stop = remove_none.replace("的","")
+    # remove_stop = remove_none.replace("项目", "")
     jieba_data = jieba.lcut(remove_stop)
     # remove_none = remove_text.replace(" ", "")
     # jieba_data = jieba.lcut(remove_none)
