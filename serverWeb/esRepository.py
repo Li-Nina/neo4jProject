@@ -202,7 +202,9 @@ def get_data_from_mysql():
     """
     try:
         # 2.建立与数据库连接 TODO: 用户名root，密码x5
-        conn = pymysql.connect(host="localhost", user="root", password="x5", database="expertserverbig",port=3306,charset="UTF8")
+        conn = pymysql.connect(host="localhost", user="root", password="x5", database="expertserverbig",
+                               port=3306,
+                               charset="UTF8")
 
         # 3.获取游标
         cursor = conn.cursor()
@@ -212,7 +214,10 @@ def get_data_from_mysql():
 
     try:
         # TODO: Java组的数据没有expert_id这些数据，所以加上了expert_id is not null
-        select_sql = "select expert_id, fieldId, name, college, education, degree, job, professional, subject, phonenumber, address, research, department, title, email, field, project from texpert_info  where expert_id is not null;"
+        select_sql = "select expert_id, fieldId, name, college, education, degree, job, professional, subject, " \
+                     "phonenumber, address, research, department, title, email, field, project, is_download " \
+                     "from texpert_info " \
+                     "where expert_id is not null and is_delete=FALSE order by publish_time desc, update_time desc;"
         rows = cursor.execute(select_sql)
         if rows == 0:
             print('数据库没有数据')
@@ -227,7 +232,7 @@ def get_data_from_mysql():
         for item in data_all:
             doc = {}
             doc['Expert_ID'] = item[0]  # 专家id  +
-            # doc['fieldID'] = item[1]  # +
+            doc['fieldID'] = item[1]  # +
             doc['name'] = item[2]  # name
             doc['college'] = item[3]  # 单位  +
             doc['education'] = item[4]  # 学历  +
@@ -243,6 +248,10 @@ def get_data_from_mysql():
             doc['email'] = item[14]  # 邮箱 email
             doc['field'] = item[15]  # 领域  +
             doc['project'] = item[16]  # 项目  +
+            if not item[17]:
+                doc['is_download'] = True  # 是否可以下载
+            else:
+                doc['is_download'] = False
             mysql_list.append(doc)
         print(mysql_list)
         return mysql_list
@@ -325,6 +334,7 @@ def parse_word(word_path):
     return doc
 
 # 保存到数据库
+# 保存到数据库
 def save_to_mysql(data):
     try:
         # 2.建立与数据库连接 TODO: 用户名root，密码x5
@@ -344,12 +354,15 @@ def save_to_mysql(data):
     try:
         if len(data.keys()) == 1 and "Expert_ID" in data.keys():
             # 仅仅有一个key，还是Expert_ID说明这是为了执行删除操作
-            delete_sql = "delete from texpert_info where expert_id=%s;"
-            delete_rows = cursor.execute(delete_sql, args=[data['Expert_ID']])
+            delete_sql = "update texpert_info set is_delete=TRUE where expert_id=%s;"
+            print(cursor.mogrify(delete_sql, args=data['Expert_ID']))
+            delete_rows = cursor.execute(delete_sql, args=data['Expert_ID'])
             if delete_rows == 0:
                 raise pymysql.MySQLError('数据删除失败，可能是SQL语句或数据类型的问题')
             else:
+                conn.commit()
                 return "SUCCESS"
+
         # 先查Expert_id对应的数据是否存在
         select_sql = "select expert_id from texpert_info where expert_id=%s;"
         select_rows = cursor.execute(select_sql, args=[data['Expert_ID']])
@@ -361,7 +374,7 @@ def save_to_mysql(data):
                          "%(education)s, %(degree)s, %(job)s, %(professional)s, %(subject)s, %(phone)s, %(address)s," \
                          "%(research)s, %(department)s, %(title)s, %(email)s, %(field)s, %(project)s);"
             # 这里字典的顺序和SQL语句参数的顺序一致，所以可以直接.values()
-            print(cursor.mogrify(insert_sql, args=data))
+            # print(cursor.mogrify(insert_sql, args=data))
             rows = cursor.execute(insert_sql, args=data)
             if rows == 0:
                 raise pymysql.MySQLError('数据插入失败，可能是SQL语句或数据类型的问题')
@@ -371,14 +384,49 @@ def save_to_mysql(data):
                          "education=%(education)s, degree=%(degree)s, job=%(job)s, professional=%(professional)s, " \
                          "subject=%(subject)s, phonenumber=%(phone)s, address=%(address)s, research=%(research)s, " \
                          "department=%(department)s, title=%(title)s, email=%(email)s, field=%(field)s, " \
-                         "project=%(project)s where expert_id=%(Expert_ID)s;"
+                         "project=%(project)s, is_delete=FALSE where expert_id=%(Expert_ID)s;"
             # 查看生成的SQL语句
-            print(cursor.mogrify(update_sql, args=data))
+            # print(cursor.mogrify(update_sql, args=data))
             rows = cursor.execute(update_sql, args=data)
             print('修改影响的行数：', rows)
         conn.commit()
         return "SUCCESS"
 
+    except Exception as e:
+        print('数据库操作异常，开始回滚', e)
+        conn.rollback()
+        return "ERROR"
+    finally:
+        # 5：关闭游标、关闭连接
+        cursor.close()
+        conn.close()
+
+
+# 修改数据库is_download字段为1
+def modify_is_download(expert_id, is_delete):
+    try:
+        # 2.建立与数据库连接 TODO: 用户名root，密码x5
+        conn = pymysql.connect(host="localhost",
+                               user="root",
+                               password="x5",
+                               database="expertserverbig",
+                               port=3306,
+                               charset="UTF8")
+
+        # 3.获取游标
+        cursor = conn.cursor()
+    except ConnectionError as e:
+        print("数据库连接异常 或 获取游标异常！", e)
+        return "数据保存失败"
+    try:
+        if is_delete:
+            update_sql = "update texpert_info set is_download=TRUE where expert_id=%s;"
+        else:
+            update_sql = "update texpert_info set is_download=FALSE where expert_id=%s;"
+        print(cursor.mogrify(update_sql, args=expert_id))
+        update_rows = cursor.execute(update_sql, args=expert_id)
+        conn.commit()
+        return "SUCCESS"
     except Exception as e:
         print('数据库操作异常，开始回滚', e)
         conn.rollback()
@@ -463,10 +511,51 @@ def find_excel_file(path):
                 # 解析Excel模板中的数据
                 doc = parse_excel(file_path)
                 # 保存到数据库 优化 1.如果expert_id已经存在则更新数据 2.如果expert_id不存在则新增数据
-                result = save_to_mysql(doc)
-                if result == 'ERROR':
-                    return '上传文件，并保存到数据库失败！', 500
+                result1 = save_to_mysql(doc)
+                result2 = modify_is_download(doc['Expert_ID'], True)
+                if (result1 == 'ERROR') or (result2 == "REEOR"):
+                    print("!!!!!!!上传文件，并保存到数据库或修改可下载字段失败！")
+                    return "ERROR"
+                else:
+                    try:
+                        # 先删除原来的
+                        es.delete(index=my_index, doc_type=my_doc_type, id=doc['Expert_ID'])
+                    except Exception as e:
+                        print("!!!!!!!!ES中不存在对应ID的文档，此处为新增操作，接下来直接新增ES即可。", e)
+                    # 再创建新的
+                    res = es.index(index=my_index, doc_type=my_doc_type, body=doc, id=doc['Expert_ID'])
+                    if (res['result'] != "created") and (res['result'] != "updated"):
+                        print("!!!!!!!数据库新增或更新数据后，ES中更新失败！")
+                # 重命名文件
+                new_file_name = str(doc['Expert_ID']) + '.xlsx'
+                new_file_path = os.path.join(BASE_DIR, 'data/excel/' + new_file_name)
+                # 判断对应名字的文件是否存在，如果已存在，删除原来的文件保存新的文件
+                if os.path.exists(new_file_path):
+                    os.remove(new_file_path)
 
+                os.renames(file_path, new_file_path)
+            elif ret_list[1] in ['docx', 'doc']:
+                print(f"{file}是Word文件，开始解析里面的数据。")
+                # 开始读取里面的数据保存到数据库
+                file_path = os.path.join(path, file)
+                # 解析Word模板中的数据
+                doc = parse_word(file_path)
+                # 保存到数据库 优化 1.如果expert_id已经存在则更新数据 2.如果expert_id不存在则新增数据
+                result1 = save_to_mysql(doc)
+                result2 = modify_is_download(doc['Expert_ID'], True)
+                if (result1 == 'ERROR') or (result2 == "REEOR"):
+                    print("!!!!!!!上传World文件，并保存到数据库或修改可下载字段失败！")
+                    return "ERROR"
+                else:
+                    try:
+                        # 先删除原来的
+                        es.delete(index=my_index, doc_type=my_doc_type, id=doc['Expert_ID'])
+                    except Exception as e:
+                        print("!!!!!!!!ES中不存在对应ID的文档，此处为新增操作，接下来直接新增ES即可。", e)
+                    # 再创建新的
+                    res = es.index(index=my_index, doc_type=my_doc_type, body=doc, id=doc['Expert_ID'])
+                    if (res['result'] != "created") and (res['result'] != "updated"):
+                        print("!!!!!!!数据库新增或更新数据后，ES中更新失败！")
                 # 重命名文件
                 new_file_name = str(doc['Expert_ID']) + '.xlsx'
                 new_file_path = os.path.join(BASE_DIR, 'data/excel/' + new_file_name)
@@ -482,6 +571,7 @@ def find_excel_file(path):
                 if os.path.exists(new_file_path):
                     os.remove(new_file_path)
                 os.renames(this_path, new_file_path)
+
 
 # if __name__ == '__main__':
 #     mysql_data = get_data_from_mysql()
